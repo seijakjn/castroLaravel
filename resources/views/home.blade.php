@@ -22,7 +22,7 @@
     </head>
     <body class="antialiased">
         <div>
-            <h1>Welcome to Castro!</h1>
+            <h1>try home</h1>
         </div>
     </body>
 </html>
