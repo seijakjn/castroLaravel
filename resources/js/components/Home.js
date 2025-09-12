@@ -1,9 +1,21 @@
 import React from 'react'
 
-export default function Home(){
+function Home() {
     return (
-        <div id="home" className='container'>
-            <p>joannes home</p>
+        <div className="container">
+            <div className="row justify-content-center">
+                <div className="col-md-8">
+                    <div className="card">
+                        <div className="card-header">Home Component</div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
+}
+
+export default Home;
+
+if (document.getElementById('home')) {
+    ReactDOM.render(<Home />, document.getElementById('home'));
 }

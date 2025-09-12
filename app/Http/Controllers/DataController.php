@@ -22,4 +22,10 @@ class DataController extends Controller
 
         return response()->json(['message' => 'Data saved successfully!'], 200);
     }
+
+    public function fetchData()
+    {
+        $data = Demo::all(); // Fetch all records from the demo table
+        return response()->json($data);
+    }
 }

@@ -14,9 +14,11 @@ class CreateDemoTable extends Migration
     public function up()
     {
         Schema::create('demo', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('first_name');
+        $table->string('last_name');
+        $table->timestamps();
+    });
     }
 
     /**

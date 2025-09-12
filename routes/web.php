@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\DataController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +21,6 @@ Route::get('/home', function () {
     return view('home');
 });
 
+
+Route::post('/api/save-data', [DataController::class, 'store']);
+Route::get('/fetch-data', [DataController::class, 'fetchData']);

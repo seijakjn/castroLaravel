@@ -11980,3 +11980,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+#homepage p {
+  color: blue;
+  background-color: lightgray;
+  font-size: 20px;
+}

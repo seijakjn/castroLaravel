@@ -23,6 +23,7 @@
     <body class="antialiased">
         <div>
             <h1>try home</h1>
+            <script src="/js/components/Home.js"></script>
         </div>
     </body>
 </html>
