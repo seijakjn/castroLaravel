@@ -11,6 +11,7 @@ export default function routers() {
       <routes>
         <route path="/" element={<Example/>} />
         <route path="/home" element={<Home/>} />
+        <route path="/about" element={<About/>} />
       </routes>
     </router>
   )
