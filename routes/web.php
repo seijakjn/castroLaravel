@@ -21,6 +21,11 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/admin', function () {
+    return view('admin');
+});
+
 
 Route::post('/api/save-data', [DataController::class, 'store']);
 Route::get('/fetch-data', [DataController::class, 'fetchData']);
+Route::put('/api/update-data/{id}', [DataController::class, 'update']);

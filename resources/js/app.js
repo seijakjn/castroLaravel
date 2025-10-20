@@ -15,4 +15,5 @@ require('./bootstrap');
 require('./components/Example');
 require('./components/routers');
 require('./components/Home');
+require('./components/Admin');
 
