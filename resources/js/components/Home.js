@@ -5,6 +5,15 @@ function Home() {
     const [searchTerm, setSearchTerm] = useState('');
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [dashboardData, setDashboardData] = useState({
+        totalStudents: 0,
+        totalDepartments: 0,
+        totalCourses: 0,
+        totalInstructors: 0,
+        studentsByDepartment: [],
+        studentsBySemester: []
+    });
+    const [loading, setLoading] = useState(true);
 
     // Get user data from URL params or localStorage (for demo)
     const [user, setUser] = useState(() => {
@@ -24,6 +33,67 @@ function Home() {
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Fetch dashboard data from API
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                setLoading(true);
+                const [studentsRes, departmentsRes, coursesRes, instructorsRes] = await Promise.all([
+                    fetch('/api/students'),
+                    fetch('/api/departments'),
+                    fetch('/api/courses'),
+                    fetch('/api/instructors')
+                ]);
+
+                const [students, departments, courses, instructors] = await Promise.all([
+                    studentsRes.json(),
+                    departmentsRes.json(),
+                    coursesRes.json(),
+                    instructorsRes.json()
+                ]);
+
+                // Process data for charts
+                const studentsByDepartment = departments.map(dept => ({
+                    name: dept.code || dept.name,
+                    students: students.filter(student => student.department_id === dept.id).length,
+                    color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                }));
+
+                const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
+                    semester: sem,
+                    count: students.filter(student => student.current_semester === sem).length
+                }));
+
+                setDashboardData({
+                    totalStudents: students.length,
+                    totalDepartments: departments.length,
+                    totalCourses: courses.length,
+                    totalInstructors: instructors.length,
+                    studentsByDepartment,
+                    studentsBySemester
+                });
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                // Fallback to sample data if API fails
+                setDashboardData({
+                    totalStudents: 0,
+                    totalDepartments: 2,
+                    totalCourses: 0,
+                    totalInstructors: 0,
+                    studentsByDepartment: [
+                        { name: 'CS', students: 0, color: '#4CAF50' },
+                        { name: 'MATH', students: 0, color: '#2196F3' }
+                    ],
+                    studentsBySemester: []
+                });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
     }, []);
 
     // Apply global styles to ensure full-width
@@ -69,23 +139,6 @@ function Home() {
     const handleLogout = () => {
         window.location.href = '/';
     };
-
-    // Sample data - same as Example.js
-    const studentStats = {
-        total: 2374,
-        firstYear: 900,
-        secondYear: 700,
-        thirdYear: 624,
-        fourthYear: 150
-    };
-
-    const departmentData = [
-        { name: 'CCS', students: 600, color: '#4CAF50' },
-        { name: 'COED', students: 520, color: '#2196F3' },
-        { name: 'CBA', students: 480, color: '#FF9800' },
-        { name: 'CCJE', students: 460, color: '#00BCD4' },
-        { name: 'CAHS', students: 314, color: '#9C27B0' }
-    ];
 
     const styles = {
         container: {
@@ -175,13 +228,13 @@ function Home() {
             position: 'relative'
         },
         header: {
-            backgroundColor: 'white',
+            backgroundColor: '#2c5530',
+            color: 'white',
             padding: isMobile ? '15px 20px' : '20px 30px',
-            borderBottom: '1px solid #e0e0e0',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
             flexWrap: isMobile ? 'wrap' : 'nowrap',
             gap: isMobile ? '10px' : '0',
             boxSizing: 'border-box'
@@ -194,7 +247,7 @@ function Home() {
         pageTitle: {
             fontSize: '24px',
             fontWeight: '600',
-            color: '#2c5530',
+            color: 'white',
             margin: 0
         },
         searchContainer: {
@@ -266,13 +319,12 @@ function Home() {
             gap: isMobile ? '20px' : '30px',
             marginBottom: isMobile ? '20px' : '30px'
         },
-        // ... (copying other styles from Example.js)
         mobileMenuButton: {
             display: isMobile ? 'block' : 'none',
             backgroundColor: 'transparent',
             border: 'none',
             fontSize: '24px',
-            color: '#2c5530',
+            color: 'white',
             cursor: 'pointer',
             padding: '5px',
             marginRight: '15px'
@@ -286,6 +338,18 @@ function Home() {
             height: '100%',
             backgroundColor: 'rgba(0,0,0,0.5)',
             zIndex: 999
+        },
+        headerLogoPlaceholder: {
+            width: '40px',
+            height: '40px',
+            backgroundColor: '#4CAF50',
+            borderRadius: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '16px',
+            fontWeight: 'bold',
+            color: 'white'
         }
     };
 
@@ -318,21 +382,10 @@ function Home() {
                         <span style={styles.navIcon}>📁</span>
                         ARCHIVE
                     </a>
-                    {user.userType === 'employee' && (
-                        <a href="#" style={styles.navItem} onClick={(e) => {
-                            e.preventDefault();
-                            const params = new URLSearchParams({
-                                firstName: user.firstName,
-                                lastName: user.lastName,
-                                userType: user.userType,
-                                email: user.email
-                            });
-                            window.location.href = `/admin?${params.toString()}`;
-                        }}>
-                            <span style={styles.navIcon}>⚙️</span>
-                            ADMIN
-                        </a>
-                    )}
+                    <a href="#" style={styles.navItem}>
+                        <span style={styles.navIcon}>⚙️</span>
+                        ADMIN
+                    </a>
                     <a href="#" style={styles.navItem}>
                         <span style={styles.navIcon}>💬</span>
                         FORUM
@@ -341,7 +394,7 @@ function Home() {
                         <span style={styles.navIcon}>👤</span>
                         PROFILE
                     </a>
-                    <a href="#" style={styles.navItem} onClick={handleLogout}>
+                    <a href="#" style={styles.navItem}>
                         <span style={styles.navIcon}>🚪</span>
                         LOG OUT
                     </a>
@@ -358,8 +411,11 @@ function Home() {
                         >
                             ☰
                         </button>
+                        <div style={styles.headerLogoPlaceholder}>
+                            🎓
+                        </div>
                         <h1 style={styles.pageTitle}>
-                            Dashboard - Welcome, {user.firstName}!
+                            Castro University - Dashboard
                         </h1>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
@@ -373,13 +429,27 @@ function Home() {
                                 style={styles.searchInput}
                             />
                         </div>
-                        <div style={{...styles.logoPlaceholder, width: '40px', height: '40px', fontSize: '16px'}}>
-                            🛡️
-                        </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                            <span style={{fontSize: '14px', color: '#2c5530', fontWeight: '600'}}>
+                            <span style={{fontSize: '14px', color: 'white', fontWeight: '600'}}>
                                 {user.userType === 'employee' ? '👔' : '🎓'} {user.firstName} {user.lastName}
                             </span>
+                            {user.userType === 'employee' && (
+                                <button
+                                    style={{...styles.logoutBtn, backgroundColor: '#4CAF50', marginRight: '10px'}}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        const params = new URLSearchParams({
+                                            firstName: user.firstName,
+                                            lastName: user.lastName,
+                                            userType: user.userType,
+                                            email: user.email
+                                        });
+                                        window.location.href = `/admin?${params.toString()}`;
+                                    }}
+                                >
+                                    Admin Panel
+                                </button>
+                            )}
                             <button
                                 style={styles.logoutBtn}
                                 onClick={handleLogout}
@@ -401,36 +471,69 @@ function Home() {
                         </p>
                     </div>
 
-                    {/* Stats Grid - Same as Example.js but now shows user is logged in */}
+                    {/* University Statistics */}
+                    <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: '20px', marginBottom: '30px'}}>
+                        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Total Students</div>
+                            <div style={{fontSize: '32px', fontWeight: '700', color: '#4CAF50'}}>{loading ? '...' : dashboardData.totalStudents}</div>
+                        </div>
+                        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Departments</div>
+                            <div style={{fontSize: '32px', fontWeight: '700', color: '#2196F3'}}>{loading ? '...' : dashboardData.totalDepartments}</div>
+                        </div>
+                        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Courses</div>
+                            <div style={{fontSize: '32px', fontWeight: '700', color: '#FF9800'}}>{loading ? '...' : dashboardData.totalCourses}</div>
+                        </div>
+                        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Instructors</div>
+                            <div style={{fontSize: '32px', fontWeight: '700', color: '#9C27B0'}}>{loading ? '...' : dashboardData.totalInstructors}</div>
+                        </div>
+                    </div>
+
+                    {/* Charts Grid */}
                     <div style={styles.statsGrid}>
                         <div style={{display: 'grid', gridTemplateRows: 'auto 1fr', gap: '20px'}}>
-                            {/* Keep the same stats display */}
+                            {/* Students by Semester */}
                             <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', boxSizing: 'border-box'}}>
                                 <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '15px'}}>
-                                    TOTAL STUDENTS: {studentStats.total}
+                                    Students by Semester
                                 </h3>
-                                <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(2, 1fr)', gap: isMobile ? '10px' : '15px', marginTop: '20px'}}>
-                                    <div style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                        <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>1st Year:</div>
-                                        <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{studentStats.firstYear}</div>
+                                {loading ? (
+                                    <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                ) : (
+                                    <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: isMobile ? '10px' : '15px', marginTop: '20px'}}>
+                                        {dashboardData.studentsBySemester.slice(0, 8).map((sem, index) => (
+                                            <div key={index} style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
+                                                <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>Semester {sem.semester}:</div>
+                                                <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{sem.count}</div>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <div style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                        <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>2nd Year:</div>
-                                        <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{studentStats.secondYear}</div>
-                                    </div>
-                                    <div style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                        <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>3rd Year:</div>
-                                        <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{studentStats.thirdYear}</div>
-                                    </div>
-                                    <div style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                        <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>4th Year:</div>
-                                        <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{studentStats.fourthYear}</div>
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
 
                         <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+                            {/* Students by Department */}
+                            <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none'}}>
+                                <h4 style={{color: '#2c5530', marginBottom: '15px', fontSize: '16px', fontWeight: '600'}}>Students by Department</h4>
+                                {loading ? (
+                                    <div style={{textAlign: 'center', padding: '20px', color: '#666'}}>Loading...</div>
+                                ) : dashboardData.studentsByDepartment.length > 0 ? (
+                                    <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+                                        {dashboardData.studentsByDepartment.map((dept, index) => (
+                                            <div key={index} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0'}}>
+                                                <span style={{fontSize: '14px', fontWeight: '500'}}>{dept.name}</span>
+                                                <span style={{fontSize: '14px', fontWeight: '700', color: dept.color}}>{dept.students}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div style={{textAlign: 'center', padding: '20px', color: '#666'}}>No departments found</div>
+                                )}
+                            </div>
+
                             {/* Quick Actions Card */}
                             <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', textAlign: 'center'}}>
                                 <h4 style={{color: '#2c5530', marginBottom: '15px'}}>Quick Actions</h4>
@@ -442,11 +545,6 @@ function Home() {
                                         {user.userType === 'employee' ? 'Generate Reports' : 'Course Schedule'}
                                     </button>
                                 </div>
-                            </div>
-
-                            {/* Notice */}
-                            <div style={{backgroundColor: '#f8f9fa', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', textAlign: 'center', minHeight: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                <div style={{color: '#666', fontSize: '16px', fontWeight: '600'}}>NOTICE</div>
                             </div>
                         </div>
                     </div>

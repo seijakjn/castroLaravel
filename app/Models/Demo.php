@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Demo extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     // Explicitly specify the table name
     protected $table = 'demo';

@@ -61965,6 +61965,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -61979,160 +61985,397 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 function Admin() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  // State for current section (students, departments, courses)
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('students'),
     _useState2 = _slicedToArray(_useState, 2),
-    firstName = _useState2[0],
-    setFirstName = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    currentSection = _useState2[0],
+    setCurrentSection = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    lastName = _useState4[0],
-    setLastName = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    showArchived = _useState4[0],
+    setShowArchived = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState6 = _slicedToArray(_useState5, 2),
-    data = _useState6[0],
-    setData = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    editId = _useState6[0],
+    setEditId = _useState6[1];
+
+  // Data states
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
     _useState8 = _slicedToArray(_useState7, 2),
-    editId = _useState8[0],
-    setEditId = _useState8[1];
-  var handleSubmit = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
-      var response, _response, _t, _t2;
+    students = _useState8[0],
+    setStudents = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState0 = _slicedToArray(_useState9, 2),
+    departments = _useState0[0],
+    setDepartments = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState10 = _slicedToArray(_useState1, 2),
+    courses = _useState10[0],
+    setCourses = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    archivedData = _useState12[0],
+    setArchivedData = _useState12[1];
+
+  // Form states for Student
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      student_id: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      date_of_birth: '',
+      gender: 'male',
+      address: '',
+      emergency_contact_name: '',
+      emergency_contact_phone: '',
+      department_id: '',
+      current_semester: 1,
+      gpa: '',
+      enrollment_date: '',
+      status: 'active'
+    }),
+    _useState14 = _slicedToArray(_useState13, 2),
+    studentForm = _useState14[0],
+    setStudentForm = _useState14[1];
+
+  // Form states for Department
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      name: '',
+      code: '',
+      description: '',
+      head_of_department: '',
+      contact_email: '',
+      contact_phone: ''
+    }),
+    _useState16 = _slicedToArray(_useState15, 2),
+    departmentForm = _useState16[0],
+    setDepartmentForm = _useState16[1];
+
+  // Form states for Course
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      name: '',
+      code: '',
+      description: '',
+      credits: 1,
+      semester: '1',
+      department_id: '',
+      instructor: '',
+      max_students: 50,
+      status: 'active'
+    }),
+    _useState18 = _slicedToArray(_useState17, 2),
+    courseForm = _useState18[0],
+    setCourseForm = _useState18[1];
+
+  // Load departments on component mount
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetchDepartments();
+  }, []);
+
+  // Generic fetch function
+  var fetchData = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(endpoint, setter) {
+      var response, result, _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
-            e.preventDefault();
-            if (!editId) {
-              _context.n = 5;
+            _context.p = 0;
+            _context.n = 1;
+            return fetch(endpoint);
+          case 1:
+            response = _context.v;
+            if (!response.ok) {
+              _context.n = 3;
               break;
             }
-            _context.p = 1;
             _context.n = 2;
-            return fetch("/api/update-data/".concat(editId), {
+            return response.json();
+          case 2:
+            result = _context.v;
+            setter(result);
+            _context.n = 4;
+            break;
+          case 3:
+            alert("Failed to fetch data from ".concat(endpoint));
+          case 4:
+            _context.n = 6;
+            break;
+          case 5:
+            _context.p = 5;
+            _t = _context.v;
+            console.error('Error:', _t);
+            alert('An error occurred while fetching data.');
+          case 6:
+            return _context.a(2);
+        }
+      }, _callee, null, [[0, 5]]);
+    }));
+    return function fetchData(_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  // Fetch functions
+  var fetchStudents = function fetchStudents() {
+    return fetchData('/api/students', setStudents);
+  };
+  var fetchDepartments = function fetchDepartments() {
+    return fetchData('/api/departments', setDepartments);
+  };
+  var fetchCourses = function fetchCourses() {
+    return fetchData('/api/courses', setCourses);
+  };
+  var fetchArchivedData = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
+      var endpoints;
+      return _regenerator().w(function (_context2) {
+        while (1) switch (_context2.n) {
+          case 0:
+            endpoints = {
+              students: '/api/students/archived',
+              departments: '/api/departments/archived',
+              courses: '/api/courses/archived'
+            };
+            _context2.n = 1;
+            return fetchData(endpoints[currentSection], setArchivedData);
+          case 1:
+            setShowArchived(true);
+          case 2:
+            return _context2.a(2);
+        }
+      }, _callee2);
+    }));
+    return function fetchArchivedData() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  // Submit handlers
+  var handleSubmit = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(e) {
+      var endpoints, forms, resetForms, refreshFunctions, url, method, response, errorData, _t2;
+      return _regenerator().w(function (_context3) {
+        while (1) switch (_context3.p = _context3.n) {
+          case 0:
+            e.preventDefault();
+            endpoints = {
+              students: '/api/students',
+              departments: '/api/departments',
+              courses: '/api/courses'
+            };
+            forms = {
+              students: studentForm,
+              departments: departmentForm,
+              courses: courseForm
+            };
+            resetForms = {
+              students: function students() {
+                return setStudentForm({
+                  student_id: '',
+                  first_name: '',
+                  last_name: '',
+                  email: '',
+                  phone: '',
+                  date_of_birth: '',
+                  gender: 'male',
+                  address: '',
+                  emergency_contact_name: '',
+                  emergency_contact_phone: '',
+                  department_id: '',
+                  current_semester: 1,
+                  gpa: '',
+                  enrollment_date: '',
+                  status: 'active'
+                });
+              },
+              departments: function departments() {
+                return setDepartmentForm({
+                  name: '',
+                  code: '',
+                  description: '',
+                  head_of_department: '',
+                  contact_email: '',
+                  contact_phone: ''
+                });
+              },
+              courses: function courses() {
+                return setCourseForm({
+                  name: '',
+                  code: '',
+                  description: '',
+                  credits: 1,
+                  semester: '1',
+                  department_id: '',
+                  instructor: '',
+                  max_students: 50,
+                  status: 'active'
+                });
+              }
+            };
+            refreshFunctions = {
+              students: fetchStudents,
+              departments: fetchDepartments,
+              courses: fetchCourses
+            };
+            _context3.p = 1;
+            url = editId ? "".concat(endpoints[currentSection], "/").concat(editId) : endpoints[currentSection];
+            method = editId ? 'PUT' : 'POST';
+            _context3.n = 2;
+            return fetch(url, {
+              method: method,
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+              },
+              body: JSON.stringify(forms[currentSection])
+            });
+          case 2:
+            response = _context3.v;
+            if (!response.ok) {
+              _context3.n = 3;
+              break;
+            }
+            alert("".concat(currentSection.slice(0, -1), " ").concat(editId ? 'updated' : 'created', " successfully!"));
+            resetForms[currentSection]();
+            setEditId(null);
+            refreshFunctions[currentSection]();
+            _context3.n = 5;
+            break;
+          case 3:
+            _context3.n = 4;
+            return response.json();
+          case 4:
+            errorData = _context3.v;
+            alert("Failed to ".concat(editId ? 'update' : 'create', " ").concat(currentSection.slice(0, -1), ": ").concat(errorData.message || 'Unknown error'));
+          case 5:
+            _context3.n = 7;
+            break;
+          case 6:
+            _context3.p = 6;
+            _t2 = _context3.v;
+            console.error('Error:', _t2);
+            alert('An error occurred.');
+          case 7:
+            return _context3.a(2);
+        }
+      }, _callee3, null, [[1, 6]]);
+    }));
+    return function handleSubmit(_x3) {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  // Edit handlers
+  var handleEdit = function handleEdit(item) {
+    setEditId(item.id);
+    if (currentSection === 'students') {
+      setStudentForm({
+        student_id: item.student_id || '',
+        first_name: item.first_name || '',
+        last_name: item.last_name || '',
+        email: item.email || '',
+        phone: item.phone || '',
+        date_of_birth: item.date_of_birth || '',
+        gender: item.gender || 'male',
+        address: item.address || '',
+        emergency_contact_name: item.emergency_contact_name || '',
+        emergency_contact_phone: item.emergency_contact_phone || '',
+        department_id: item.department_id || '',
+        current_semester: item.current_semester || 1,
+        gpa: item.gpa || '',
+        enrollment_date: item.enrollment_date || '',
+        status: item.status || 'active'
+      });
+    } else if (currentSection === 'departments') {
+      setDepartmentForm({
+        name: item.name || '',
+        code: item.code || '',
+        description: item.description || '',
+        head_of_department: item.head_of_department || '',
+        contact_email: item.contact_email || '',
+        contact_phone: item.contact_phone || ''
+      });
+    } else if (currentSection === 'courses') {
+      setCourseForm({
+        name: item.name || '',
+        code: item.code || '',
+        description: item.description || '',
+        credits: item.credits || 1,
+        semester: item.semester || '1',
+        department_id: item.department_id || '',
+        instructor: item.instructor || '',
+        max_students: item.max_students || 50,
+        status: item.status || 'active'
+      });
+    }
+  };
+
+  // Archive handler
+  var handleArchive = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee4(id) {
+      var endpoints, refreshFunctions, response, _t3;
+      return _regenerator().w(function (_context4) {
+        while (1) switch (_context4.p = _context4.n) {
+          case 0:
+            if (window.confirm("Are you sure you want to archive this ".concat(currentSection.slice(0, -1), "?"))) {
+              _context4.n = 1;
+              break;
+            }
+            return _context4.a(2);
+          case 1:
+            endpoints = {
+              students: "/api/students/".concat(id, "/archive"),
+              departments: "/api/departments/".concat(id, "/archive"),
+              courses: "/api/courses/".concat(id, "/archive")
+            };
+            refreshFunctions = {
+              students: fetchStudents,
+              departments: fetchDepartments,
+              courses: fetchCourses
+            };
+            _context4.p = 2;
+            _context4.n = 3;
+            return fetch(endpoints[currentSection], {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-              },
-              body: JSON.stringify({
-                firstName: firstName,
-                lastName: lastName
-              })
+              }
             });
-          case 2:
-            response = _context.v;
+          case 3:
+            response = _context4.v;
             if (response.ok) {
-              alert('Data updated successfully!');
-              setFirstName('');
-              setLastName('');
-              setEditId(null);
-              handleFetchData();
+              alert("".concat(currentSection.slice(0, -1), " archived successfully!"));
+              refreshFunctions[currentSection]();
             } else {
-              alert('Failed to update data.');
+              alert("Failed to archive ".concat(currentSection.slice(0, -1), "."));
             }
-            _context.n = 4;
+            _context4.n = 5;
             break;
-          case 3:
-            _context.p = 3;
-            _t = _context.v;
-            console.error('Error:', _t);
-            alert('An error occurred.');
           case 4:
-            _context.n = 8;
-            break;
-          case 5:
-            _context.p = 5;
-            _context.n = 6;
-            return fetch('/api/save-data', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-              },
-              body: JSON.stringify({
-                firstName: firstName,
-                lastName: lastName
-              })
-            });
-          case 6:
-            _response = _context.v;
-            if (_response.ok) {
-              alert('Data saved successfully!');
-              setFirstName('');
-              setLastName('');
-              handleFetchData();
-            } else {
-              alert('Failed to save data.');
-            }
-            _context.n = 8;
-            break;
-          case 7:
-            _context.p = 7;
-            _t2 = _context.v;
-            console.error('Error:', _t2);
-            alert('An error occurred.');
-          case 8:
-            return _context.a(2);
-        }
-      }, _callee, null, [[5, 7], [1, 3]]);
-    }));
-    return function handleSubmit(_x) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  var handleFetchData = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2() {
-      var response, result, _t3;
-      return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
-          case 0:
-            _context2.p = 0;
-            _context2.n = 1;
-            return fetch('/fetch-data');
-          case 1:
-            response = _context2.v;
-            if (!response.ok) {
-              _context2.n = 3;
-              break;
-            }
-            _context2.n = 2;
-            return response.json();
-          case 2:
-            result = _context2.v;
-            setData(result);
-            _context2.n = 4;
-            break;
-          case 3:
-            alert('Failed to fetch data.');
-          case 4:
-            _context2.n = 6;
-            break;
-          case 5:
-            _context2.p = 5;
-            _t3 = _context2.v;
+            _context4.p = 4;
+            _t3 = _context4.v;
             console.error('Error:', _t3);
-            alert('An error occurred while fetching data.');
-          case 6:
-            return _context2.a(2);
+            alert('An error occurred while archiving.');
+          case 5:
+            return _context4.a(2);
         }
-      }, _callee2, null, [[0, 5]]);
+      }, _callee4, null, [[2, 4]]);
     }));
-    return function handleFetchData() {
-      return _ref2.apply(this, arguments);
+    return function handleArchive(_x4) {
+      return _ref4.apply(this, arguments);
     };
   }();
-  var handleEdit = function handleEdit(item) {
-    setEditId(item.id);
-    setFirstName(item.first_name);
-    setLastName(item.last_name);
-  };
-  var handleDelete = function handleDelete(id) {
-    if (!window.confirm('Are you sure you want to archive this record?')) return;
-    setData(function (prevData) {
-      return prevData.filter(function (item) {
-        return item.id !== id;
-      });
-    });
+
+  // Section change handler
+  var handleSectionChange = function handleSectionChange(section) {
+    setCurrentSection(section);
+    setShowArchived(false);
+    setEditId(null);
+
+    // Fetch data for the new section
+    if (section === 'students') fetchStudents();else if (section === 'departments') fetchDepartments();else if (section === 'courses') fetchCourses();
   };
   var handleBackToHome = function handleBackToHome() {
     var urlParams = new URLSearchParams(window.location.search);
@@ -62144,15 +62387,775 @@ function Admin() {
     });
     window.location.href = "/home?".concat(userParams.toString());
   };
+
+  // Get current data and form based on section
+  var getCurrentData = function getCurrentData() {
+    if (currentSection === 'students') return students;
+    if (currentSection === 'departments') return departments;
+    if (currentSection === 'courses') return courses;
+    return [];
+  };
+  var getCurrentForm = function getCurrentForm() {
+    if (currentSection === 'students') return studentForm;
+    if (currentSection === 'departments') return departmentForm;
+    if (currentSection === 'courses') return courseForm;
+    return {};
+  };
+  var handleFormChange = function handleFormChange(field, value) {
+    if (currentSection === 'students') {
+      setStudentForm(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
+      });
+    } else if (currentSection === 'departments') {
+      setDepartmentForm(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
+      });
+    } else if (currentSection === 'courses') {
+      setCourseForm(function (prev) {
+        return _objectSpread(_objectSpread({}, prev), {}, _defineProperty({}, field, value));
+      });
+    }
+  };
+
+  // Render form fields based on current section
+  var renderFormFields = function renderFormFields() {
+    var form = getCurrentForm();
+    if (currentSection === 'students') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Student ID"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.student_id,
+              onChange: function onChange(e) {
+                return handleFormChange('student_id', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Department"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+              className: "form-control",
+              value: form.department_id,
+              onChange: function onChange(e) {
+                return handleFormChange('department_id', e.target.value);
+              },
+              required: true,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "",
+                children: "Select Department"
+              }), departments.map(function (dept) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  value: dept.id,
+                  children: dept.name
+                }, dept.id);
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "First Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.first_name,
+              onChange: function onChange(e) {
+                return handleFormChange('first_name', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Last Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.last_name,
+              onChange: function onChange(e) {
+                return handleFormChange('last_name', e.target.value);
+              },
+              required: true
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Email"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "email",
+              className: "form-control",
+              value: form.email,
+              onChange: function onChange(e) {
+                return handleFormChange('email', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Phone"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.phone,
+              onChange: function onChange(e) {
+                return handleFormChange('phone', e.target.value);
+              }
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Date of Birth"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "date",
+              className: "form-control",
+              value: form.date_of_birth,
+              onChange: function onChange(e) {
+                return handleFormChange('date_of_birth', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Gender"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+              className: "form-control",
+              value: form.gender,
+              onChange: function onChange(e) {
+                return handleFormChange('gender', e.target.value);
+              },
+              required: true,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "male",
+                children: "Male"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "female",
+                children: "Female"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "other",
+                children: "Other"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Current Semester"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
+              className: "form-control",
+              value: form.current_semester,
+              onChange: function onChange(e) {
+                return handleFormChange('current_semester', parseInt(e.target.value));
+              },
+              required: true,
+              children: [1, 2, 3, 4, 5, 6, 7, 8].map(function (sem) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("option", {
+                  value: sem,
+                  children: ["Semester ", sem]
+                }, sem);
+              })
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "GPA"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "number",
+              step: "0.01",
+              min: "0",
+              max: "4",
+              className: "form-control",
+              value: form.gpa,
+              onChange: function onChange(e) {
+                return handleFormChange('gpa', e.target.value);
+              }
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Enrollment Date"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "date",
+              className: "form-control",
+              value: form.enrollment_date,
+              onChange: function onChange(e) {
+                return handleFormChange('enrollment_date', e.target.value);
+              },
+              required: true
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "form-label",
+            children: "Address"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            className: "form-control",
+            rows: "3",
+            value: form.address,
+            onChange: function onChange(e) {
+              return handleFormChange('address', e.target.value);
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Emergency Contact Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.emergency_contact_name,
+              onChange: function onChange(e) {
+                return handleFormChange('emergency_contact_name', e.target.value);
+              }
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Emergency Contact Phone"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.emergency_contact_phone,
+              onChange: function onChange(e) {
+                return handleFormChange('emergency_contact_phone', e.target.value);
+              }
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "form-label",
+            children: "Status"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+            className: "form-control",
+            value: form.status,
+            onChange: function onChange(e) {
+              return handleFormChange('status', e.target.value);
+            },
+            required: true,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "active",
+              children: "Active"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "inactive",
+              children: "Inactive"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "graduated",
+              children: "Graduated"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: "suspended",
+              children: "Suspended"
+            })]
+          })]
+        })]
+      });
+    } else if (currentSection === 'departments') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Department Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.name,
+              onChange: function onChange(e) {
+                return handleFormChange('name', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Department Code"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.code,
+              onChange: function onChange(e) {
+                return handleFormChange('code', e.target.value);
+              },
+              required: true
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "form-label",
+            children: "Description"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            className: "form-control",
+            rows: "3",
+            value: form.description,
+            onChange: function onChange(e) {
+              return handleFormChange('description', e.target.value);
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Head of Department"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.head_of_department,
+              onChange: function onChange(e) {
+                return handleFormChange('head_of_department', e.target.value);
+              }
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Contact Email"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "email",
+              className: "form-control",
+              value: form.contact_email,
+              onChange: function onChange(e) {
+                return handleFormChange('contact_email', e.target.value);
+              }
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-4 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Contact Phone"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.contact_phone,
+              onChange: function onChange(e) {
+                return handleFormChange('contact_phone', e.target.value);
+              }
+            })]
+          })]
+        })]
+      });
+    } else if (currentSection === 'courses') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Course Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.name,
+              onChange: function onChange(e) {
+                return handleFormChange('name', e.target.value);
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Course Code"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.code,
+              onChange: function onChange(e) {
+                return handleFormChange('code', e.target.value);
+              },
+              required: true
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "mb-3",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+            className: "form-label",
+            children: "Description"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+            className: "form-control",
+            rows: "3",
+            value: form.description,
+            onChange: function onChange(e) {
+              return handleFormChange('description', e.target.value);
+            }
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-3 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Credits"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "number",
+              min: "1",
+              max: "6",
+              className: "form-control",
+              value: form.credits,
+              onChange: function onChange(e) {
+                return handleFormChange('credits', parseInt(e.target.value));
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-3 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Semester"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("select", {
+              className: "form-control",
+              value: form.semester,
+              onChange: function onChange(e) {
+                return handleFormChange('semester', e.target.value);
+              },
+              required: true,
+              children: [1, 2, 3, 4, 5, 6, 7, 8].map(function (sem) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("option", {
+                  value: sem,
+                  children: ["Semester ", sem]
+                }, sem);
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-3 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Max Students"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "number",
+              min: "1",
+              className: "form-control",
+              value: form.max_students,
+              onChange: function onChange(e) {
+                return handleFormChange('max_students', parseInt(e.target.value));
+              },
+              required: true
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-3 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Status"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+              className: "form-control",
+              value: form.status,
+              onChange: function onChange(e) {
+                return handleFormChange('status', e.target.value);
+              },
+              required: true,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "active",
+                children: "Active"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "inactive",
+                children: "Inactive"
+              })]
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Department"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
+              className: "form-control",
+              value: form.department_id,
+              onChange: function onChange(e) {
+                return handleFormChange('department_id', e.target.value);
+              },
+              required: true,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                value: "",
+                children: "Select Department"
+              }), departments.map(function (dept) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                  value: dept.id,
+                  children: dept.name
+                }, dept.id);
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "col-md-6 mb-3",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              className: "form-label",
+              children: "Instructor"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              type: "text",
+              className: "form-control",
+              value: form.instructor,
+              onChange: function onChange(e) {
+                return handleFormChange('instructor', e.target.value);
+              }
+            })]
+          })]
+        })]
+      });
+    }
+  };
+
+  // Render data table
+  var renderDataTable = function renderDataTable() {
+    var data = showArchived ? archivedData : getCurrentData();
+    if (data.length === 0) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        className: "alert alert-info",
+        children: ["No ", showArchived ? 'archived' : 'active', " ", currentSection, " found."]
+      });
+    }
+    if (currentSection === 'students') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+        className: "table table-bordered table-striped",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+          className: showArchived ? "table-warning" : "table-primary",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Student ID"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Email"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Department"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Semester"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "GPA"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Status"
+            }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Archived At"
+            }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Actions"
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+          children: data.map(function (student) {
+            var _student$department;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: student.student_id
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                children: [student.first_name, " ", student.last_name]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: student.email
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: ((_student$department = student.department) === null || _student$department === void 0 ? void 0 : _student$department.name) || 'N/A'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: student.current_semester
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: student.gpa || 'N/A'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "badge ".concat(student.status === 'active' ? 'bg-success' : student.status === 'graduated' ? 'bg-primary' : student.status === 'suspended' ? 'bg-danger' : 'bg-secondary'),
+                  children: student.status
+                })
+              }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: student.archived_at ? new Date(student.archived_at).toLocaleString() : 'N/A'
+              }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-warning btn-sm me-2",
+                  onClick: function onClick() {
+                    return handleEdit(student);
+                  },
+                  children: "Edit"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-danger btn-sm",
+                  onClick: function onClick() {
+                    return handleArchive(student.id);
+                  },
+                  children: "Archive"
+                })]
+              })]
+            }, student.id);
+          })
+        })]
+      });
+    } else if (currentSection === 'departments') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+        className: "table table-bordered table-striped",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+          className: showArchived ? "table-warning" : "table-primary",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Code"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Head"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Contact"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Students"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Courses"
+            }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Archived At"
+            }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Actions"
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+          children: data.map(function (dept) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.code
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.head_of_department || 'N/A'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.contact_email || 'N/A'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.students_count || 0
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.courses_count || 0
+              }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: dept.archived_at ? new Date(dept.archived_at).toLocaleString() : 'N/A'
+              }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-warning btn-sm me-2",
+                  onClick: function onClick() {
+                    return handleEdit(dept);
+                  },
+                  children: "Edit"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-danger btn-sm",
+                  onClick: function onClick() {
+                    return handleArchive(dept.id);
+                  },
+                  children: "Archive"
+                })]
+              })]
+            }, dept.id);
+          })
+        })]
+      });
+    } else if (currentSection === 'courses') {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
+        className: "table table-bordered table-striped",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
+          className: showArchived ? "table-warning" : "table-primary",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Code"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Name"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Department"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Credits"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Semester"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Instructor"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Max Students"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Status"
+            }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Archived At"
+            }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
+              children: "Actions"
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
+          children: data.map(function (course) {
+            var _course$department;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.code
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.name
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: ((_course$department = course.department) === null || _course$department === void 0 ? void 0 : _course$department.name) || 'N/A'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.credits
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.semester
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.instructor || 'TBA'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.max_students
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                  className: "badge ".concat(course.status === 'active' ? 'bg-success' : 'bg-secondary'),
+                  children: course.status
+                })
+              }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
+                children: course.archived_at ? new Date(course.archived_at).toLocaleString() : 'N/A'
+              }), !showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-warning btn-sm me-2",
+                  onClick: function onClick() {
+                    return handleEdit(course);
+                  },
+                  children: "Edit"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                  className: "btn btn-danger btn-sm",
+                  onClick: function onClick() {
+                    return handleArchive(course.id);
+                  },
+                  children: "Archive"
+                })]
+              })]
+            }, course.id);
+          })
+        })]
+      });
+    }
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
-      className: "navbar navbar-expand-lg navbar-dark bg-success fixed-top",
+      className: "navbar navbar-expand-lg navbar-dark bg-primary fixed-top",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "container-fluid",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
           className: "navbar-brand ms-3",
           href: "#",
-          children: "Castro App - Admin Panel"
+          children: "Castro University - Profile Management System"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "navbar-toggler",
           type: "button",
@@ -62192,122 +63195,193 @@ function Admin() {
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("main", {
-      className: "container",
+      className: "container-fluid",
       style: {
         paddingTop: '80px'
       },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "card shadow p-4",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "d-flex justify-content-between align-items-center mb-4",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
-            className: "text-center mb-0",
-            children: ["Admin Panel - ", editId ? 'Edit Data' : 'Submit Your Data']
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "badge bg-warning text-dark px-3 py-2",
-            children: "Employee Access Only"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
-          onSubmit: handleSubmit,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "mb-3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-              htmlFor: "firstName",
-              className: "form-label",
-              children: "First Name:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-              type: "text",
-              id: "firstName",
-              className: "form-control",
-              value: firstName,
-              onChange: function onChange(e) {
-                return setFirstName(e.target.value);
-              },
-              required: true
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: "mb-3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
-              htmlFor: "lastName",
-              className: "form-label",
-              children: "Last Name:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-              type: "text",
-              id: "lastName",
-              className: "form-control",
-              value: lastName,
-              onChange: function onChange(e) {
-                return setLastName(e.target.value);
-              },
-              required: true
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            type: "submit",
-            className: "btn btn-success w-100",
-            children: editId ? 'Update' : 'Submit'
-          }), editId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-            type: "button",
-            className: "btn btn-secondary w-100 mt-2",
-            onClick: function onClick() {
-              setEditId(null);
-              setFirstName('');
-              setLastName('');
-            },
-            children: "Cancel Edit"
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-          onClick: handleFetchData,
-          className: "btn btn-primary w-100 mt-3",
-          children: "View Data"
-        }), data.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "table-responsive mt-4",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("table", {
-            className: "table table-bordered table-striped",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("thead", {
-              className: "table-success",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-                  children: "ID"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-                  children: "First Name"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-                  children: "Last Name"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-                  children: "Created At"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("th", {
-                  children: "Actions"
-                })]
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "col-md-3",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "card shadow",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "card-header bg-primary text-white",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h5", {
+                className: "mb-0",
+                children: "Management Sections"
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
-              children: data.map(function (item) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                    children: item.id
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                    children: item.first_name
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                    children: item.last_name
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("td", {
-                    children: new Date(item.created_at).toLocaleString()
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                      className: "btn btn-warning btn-sm me-2",
-                      onClick: function onClick() {
-                        return handleEdit(item);
-                      },
-                      children: "Edit"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                      className: "btn btn-danger btn-sm",
-                      onClick: function onClick() {
-                        return handleDelete(item.id);
-                      },
-                      children: "Archive"
-                    })]
-                  })]
-                }, item.id);
-              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              className: "list-group list-group-flush",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                className: "list-group-item list-group-item-action d-flex align-items-center ".concat(currentSection === 'students' ? 'active' : ''),
+                onClick: function onClick() {
+                  return handleSectionChange('students');
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
+                  width: "20",
+                  height: "20",
+                  viewBox: "0 0 24 24",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg",
+                  className: "me-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+                    d: "M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 7.5V6.5C15 5.67 14.33 5 13.5 5H10.5C9.67 5 9 5.67 9 6.5V7.5L3 7V9L9 8.5V21C9 21.55 9.45 22 10 22H11C11.55 22 12 21.55 12 21V16H12V21C12 21.55 12.45 22 13 22H14C14.55 22 15 21.55 15 21V8.5L21 9Z",
+                    fill: "currentColor"
+                  })
+                }), "Student Profiles"]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                className: "list-group-item list-group-item-action d-flex align-items-center ".concat(currentSection === 'departments' ? 'active' : ''),
+                onClick: function onClick() {
+                  return handleSectionChange('departments');
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
+                  width: "20",
+                  height: "20",
+                  viewBox: "0 0 24 24",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg",
+                  className: "me-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+                    d: "M12 3L2 12H5V20H19V12H22L12 3ZM12 8.75C12.69 8.75 13.25 9.31 13.25 10S12.69 11.25 12 11.25 10.75 10.69 10.75 10 11.31 8.75 12 8.75ZM7 19V17C7 15.9 9.79 15 12 15S17 15.9 17 17V19H7Z",
+                    fill: "currentColor"
+                  })
+                }), "Departments"]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                className: "list-group-item list-group-item-action d-flex align-items-center ".concat(currentSection === 'courses' ? 'active' : ''),
+                onClick: function onClick() {
+                  return handleSectionChange('courses');
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("svg", {
+                  width: "20",
+                  height: "20",
+                  viewBox: "0 0 24 24",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg",
+                  className: "me-2",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("path", {
+                    d: "M18 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V4C20 2.9 19.1 2 18 2ZM18 20H6V4H18V20ZM7 19H9V17H7V19ZM11 19H13V17H11V19ZM15 19H17V17H15V19ZM7 15H9V13H7V15ZM11 15H13V13H11V15ZM15 15H17V13H15V15ZM7 11H9V9H7V11ZM11 11H13V9H11V11ZM15 11H17V9H15V11ZM7 7H17V5H7V7Z",
+                    fill: "currentColor"
+                  })
+                }), "Courses"]
+              })]
             })]
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "col-md-9",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "card shadow",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "card-header bg-light",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "d-flex justify-content-between align-items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+                  className: "mb-0",
+                  children: editId ? "Edit ".concat(currentSection.slice(0, -1)) : "Add New ".concat(currentSection.slice(0, -1))
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  className: "badge bg-info text-dark px-3 py-2",
+                  children: "University Profile Management"
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "card-body",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+                onSubmit: handleSubmit,
+                children: [renderFormFields(), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  className: "d-flex gap-2",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
+                    type: "submit",
+                    className: "btn btn-success",
+                    children: [editId ? 'Update' : 'Create', " ", currentSection.slice(0, -1)]
+                  }), editId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    type: "button",
+                    className: "btn btn-secondary",
+                    onClick: function onClick() {
+                      setEditId(null);
+                      if (currentSection === 'students') {
+                        setStudentForm({
+                          student_id: '',
+                          first_name: '',
+                          last_name: '',
+                          email: '',
+                          phone: '',
+                          date_of_birth: '',
+                          gender: 'male',
+                          address: '',
+                          emergency_contact_name: '',
+                          emergency_contact_phone: '',
+                          department_id: '',
+                          current_semester: 1,
+                          gpa: '',
+                          enrollment_date: '',
+                          status: 'active'
+                        });
+                      } else if (currentSection === 'departments') {
+                        setDepartmentForm({
+                          name: '',
+                          code: '',
+                          description: '',
+                          head_of_department: '',
+                          contact_email: '',
+                          contact_phone: ''
+                        });
+                      } else if (currentSection === 'courses') {
+                        setCourseForm({
+                          name: '',
+                          code: '',
+                          description: '',
+                          credits: 1,
+                          semester: '1',
+                          department_id: '',
+                          instructor: '',
+                          max_students: 50,
+                          status: 'active'
+                        });
+                      }
+                    },
+                    children: "Cancel Edit"
+                  })]
+                })]
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "card shadow mt-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "card-header bg-light",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                className: "d-flex justify-content-between align-items-center",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h5", {
+                  className: "mb-0",
+                  children: [showArchived ? 'Archived' : 'Active', " ", currentSection]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                  className: "d-flex gap-2",
+                  children: [!showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      if (currentSection === 'students') fetchStudents();else if (currentSection === 'departments') fetchDepartments();else if (currentSection === 'courses') fetchCourses();
+                    },
+                    className: "btn btn-primary btn-sm",
+                    children: "Refresh Data"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: fetchArchivedData,
+                    className: "btn btn-secondary btn-sm",
+                    children: "View Archived"
+                  }), showArchived && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                    onClick: function onClick() {
+                      return setShowArchived(false);
+                    },
+                    className: "btn btn-outline-secondary btn-sm",
+                    children: "Hide Archived"
+                  })]
+                })]
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "card-body",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                className: "table-responsive",
+                children: renderDataTable()
+              })
+            })]
+          })]
         })]
       })
     })]
@@ -62342,11 +63416,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Login */ "./resources/js/components/Login.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -62362,22 +63444,33 @@ function Example() {
     _useState2 = _slicedToArray(_useState, 2),
     searchTerm = _useState2[0],
     setSearchTerm = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(window.innerWidth < 768),
     _useState4 = _slicedToArray(_useState3, 2),
-    isMobileMenuOpen = _useState4[0],
-    setIsMobileMenuOpen = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(window.innerWidth < 768),
+    isMobile = _useState4[0],
+    setIsMobile = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState6 = _slicedToArray(_useState5, 2),
-    isMobile = _useState6[0],
-    setIsMobile = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    showLogin = _useState6[0],
+    setShowLogin = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState8 = _slicedToArray(_useState7, 2),
-    showLogin = _useState8[0],
-    setShowLogin = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    user = _useState8[0],
+    setUser = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      totalStudents: 0,
+      totalDepartments: 0,
+      totalCourses: 0,
+      totalInstructors: 0,
+      studentsByDepartment: [],
+      studentsBySemester: []
+    }),
     _useState0 = _slicedToArray(_useState9, 2),
-    user = _useState0[0],
-    setUser = _useState0[1];
+    dashboardData = _useState0[0],
+    setDashboardData = _useState0[1];
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState10 = _slicedToArray(_useState1, 2),
+    loading = _useState10[0],
+    setLoading = _useState10[1];
 
   // Handle window resize
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -62388,6 +63481,99 @@ function Example() {
     return function () {
       return window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // Fetch dashboard data from API
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchDashboardData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _yield$Promise$all, _yield$Promise$all2, studentsRes, departmentsRes, coursesRes, instructorsRes, _yield$Promise$all3, _yield$Promise$all4, students, departments, courses, instructors, studentsByDepartment, studentsBySemester, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _context.p = 0;
+              setLoading(true);
+              _context.n = 1;
+              return Promise.all([fetch('/api/students'), fetch('/api/departments'), fetch('/api/courses'), fetch('/api/instructors')]);
+            case 1:
+              _yield$Promise$all = _context.v;
+              _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 4);
+              studentsRes = _yield$Promise$all2[0];
+              departmentsRes = _yield$Promise$all2[1];
+              coursesRes = _yield$Promise$all2[2];
+              instructorsRes = _yield$Promise$all2[3];
+              _context.n = 2;
+              return Promise.all([studentsRes.json(), departmentsRes.json(), coursesRes.json(), instructorsRes.json()]);
+            case 2:
+              _yield$Promise$all3 = _context.v;
+              _yield$Promise$all4 = _slicedToArray(_yield$Promise$all3, 4);
+              students = _yield$Promise$all4[0];
+              departments = _yield$Promise$all4[1];
+              courses = _yield$Promise$all4[2];
+              instructors = _yield$Promise$all4[3];
+              // Process data for charts
+              studentsByDepartment = departments.map(function (dept) {
+                return {
+                  name: dept.code || dept.name,
+                  students: students.filter(function (student) {
+                    return student.department_id === dept.id;
+                  }).length,
+                  color: "hsl(".concat(Math.random() * 360, ", 70%, 50%)")
+                };
+              });
+              studentsBySemester = [1, 2, 3, 4, 5, 6, 7, 8].map(function (sem) {
+                return {
+                  semester: sem,
+                  count: students.filter(function (student) {
+                    return student.current_semester === sem;
+                  }).length
+                };
+              });
+              setDashboardData({
+                totalStudents: students.length,
+                totalDepartments: departments.length,
+                totalCourses: courses.length,
+                totalInstructors: instructors.length,
+                studentsByDepartment: studentsByDepartment,
+                studentsBySemester: studentsBySemester
+              });
+              _context.n = 4;
+              break;
+            case 3:
+              _context.p = 3;
+              _t = _context.v;
+              console.error('Error fetching dashboard data:', _t);
+              // Fallback to sample data if API fails
+              setDashboardData({
+                totalStudents: 0,
+                totalDepartments: 2,
+                totalCourses: 0,
+                totalInstructors: 0,
+                studentsByDepartment: [{
+                  name: 'CS',
+                  students: 0,
+                  color: '#4CAF50'
+                }, {
+                  name: 'MATH',
+                  students: 0,
+                  color: '#2196F3'
+                }],
+                studentsBySemester: []
+              });
+            case 4:
+              _context.p = 4;
+              setLoading(false);
+              return _context.f(4);
+            case 5:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 3, 4, 5]]);
+      }));
+      return function fetchDashboardData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    fetchDashboardData();
   }, []);
 
   // Apply global styles to ensure full-width
@@ -62423,36 +63609,6 @@ function Example() {
     setUser(null);
     // You can add more logout logic here
   };
-
-  // Sample data - replace with real data
-  var studentStats = {
-    total: 2374,
-    firstYear: 900,
-    secondYear: 700,
-    thirdYear: 624,
-    fourthYear: 150
-  };
-  var departmentData = [{
-    name: 'CCS',
-    students: 600,
-    color: '#4CAF50'
-  }, {
-    name: 'COED',
-    students: 520,
-    color: '#2196F3'
-  }, {
-    name: 'CBA',
-    students: 480,
-    color: '#FF9800'
-  }, {
-    name: 'CCJE',
-    students: 460,
-    color: '#00BCD4'
-  }, {
-    name: 'CAHS',
-    students: 314,
-    color: '#9C27B0'
-  }];
   var styles = {
     body: {
       margin: 0,
@@ -62464,99 +63620,38 @@ function Example() {
       overflow: 'hidden'
     },
     container: {
-      display: 'flex',
       minHeight: '100vh',
       backgroundColor: '#f8f9fa',
       width: '100vw',
       height: '100vh',
       margin: 0,
-      padding: 0,
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0
-    },
-    sidebar: {
-      width: isMobile ? isMobileMenuOpen ? '250px' : '0' : '250px',
-      backgroundColor: '#2c5530',
-      color: 'white',
-      padding: '0',
-      boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
-      position: 'fixed',
-      height: '100vh',
-      overflowY: 'auto',
-      transition: 'width 0.3s ease',
-      zIndex: 1000,
-      overflow: 'hidden'
-    },
-    logoSection: {
-      padding: '30px 20px',
-      borderBottom: '1px solid rgba(255,255,255,0.1)',
-      textAlign: 'center'
+      padding: 0
     },
     logoPlaceholder: {
-      width: '80px',
-      height: '80px',
+      width: '40px',
+      height: '40px',
       backgroundColor: '#4CAF50',
       borderRadius: '10px',
-      margin: '0 auto 15px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      fontSize: '24px',
-      fontWeight: 'bold',
-      color: 'white',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
-    },
-    logoText: {
       fontSize: '16px',
-      fontWeight: '600',
-      color: '#ffffff',
-      margin: 0
-    },
-    nav: {
-      padding: '20px 0'
-    },
-    navItem: {
-      display: 'flex',
-      alignItems: 'center',
-      padding: '15px 25px',
-      color: 'white',
-      textDecoration: 'none',
-      transition: 'all 0.3s ease',
-      borderLeft: '4px solid transparent',
-      fontSize: '14px',
-      fontWeight: '500'
-    },
-    navItemActive: {
-      backgroundColor: 'rgba(76, 175, 80, 0.2)',
-      borderLeftColor: '#4CAF50',
-      color: '#4CAF50'
-    },
-    navIcon: {
-      marginRight: '15px',
-      fontSize: '18px',
-      width: '20px'
+      fontWeight: 'bold',
+      color: 'white'
     },
     content: {
-      marginLeft: isMobile ? '0' : '250px',
-      flex: 1,
-      padding: '0',
-      transition: 'margin-left 0.3s ease',
-      width: isMobile ? '100vw' : 'calc(100vw - 250px)',
-      height: '100vh',
-      overflow: 'auto',
-      position: 'relative'
+      width: '100%',
+      minHeight: '100vh',
+      padding: '0'
     },
     header: {
-      backgroundColor: 'white',
+      backgroundColor: '#2c5530',
+      color: 'white',
       padding: isMobile ? '15px 20px' : '20px 30px',
-      borderBottom: '1px solid #e0e0e0',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
       flexWrap: isMobile ? 'wrap' : 'nowrap',
       gap: isMobile ? '10px' : '0',
       boxSizing: 'border-box'
@@ -62569,7 +63664,7 @@ function Example() {
     pageTitle: {
       fontSize: '24px',
       fontWeight: '600',
-      color: '#2c5530',
+      color: 'white',
       margin: 0
     },
     searchContainer: {
@@ -62793,114 +63888,22 @@ function Example() {
       color: '#666',
       fontSize: '16px',
       fontWeight: '600'
-    },
-    mobileMenuButton: {
-      display: isMobile ? 'block' : 'none',
-      backgroundColor: 'transparent',
-      border: 'none',
-      fontSize: '24px',
-      color: '#2c5530',
-      cursor: 'pointer',
-      padding: '5px',
-      marginRight: '15px'
-    },
-    mobileOverlay: {
-      display: isMobile && isMobileMenuOpen ? 'block' : 'none',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      backgroundColor: 'rgba(0,0,0,0.5)',
-      zIndex: 999
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     style: styles.container,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      style: styles.mobileOverlay,
-      onClick: function onClick() {
-        return setIsMobileMenuOpen(false);
-      }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("aside", {
-      style: styles.sidebar,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        style: styles.logoSection,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          style: styles.logoPlaceholder,
-          children: "\uD83C\uDF93"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          style: styles.logoText,
-          children: "Castro University"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("nav", {
-        style: styles.nav,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: _objectSpread(_objectSpread({}, styles.navItem), styles.navItemActive),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83C\uDFE0"
-          }), "HOME"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83D\uDCC5"
-          }), "EVENTS"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83D\uDCC1"
-          }), "ARCHIVE"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\u2699\uFE0F"
-          }), "ADMIN"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83D\uDCAC"
-          }), "FORUM"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83D\uDC64"
-          }), "PROFILE"]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-          href: "#",
-          style: styles.navItem,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-            style: styles.navIcon,
-            children: "\uD83D\uDEAA"
-          }), "LOG OUT"]
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("main", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("main", {
       style: styles.content,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("header", {
         style: styles.header,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           style: styles.headerLeft,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-            style: styles.mobileMenuButton,
-            onClick: function onClick() {
-              return setIsMobileMenuOpen(!isMobileMenuOpen);
-            },
-            children: "\u2630"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h1", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            style: styles.logoPlaceholder,
+            children: "\uD83C\uDF93"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             style: styles.pageTitle,
-            children: ["Landing Page - ", user ? "Welcome, ".concat(user.firstName) : 'logged out']
+            children: "Castro University - Landing Page"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           style: {
@@ -62994,55 +63997,47 @@ function Example() {
               style: styles.totalStudentsCard,
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h3", {
                 style: styles.totalStudentsTitle,
-                children: ["TOTAL STUDENTS: ", studentStats.total]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                children: ["TOTAL STUDENTS: ", loading ? '...' : dashboardData.totalStudents]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 style: styles.yearStatsContainer,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  style: styles.yearStat,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearLabel,
-                    children: "1st Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearNumber,
-                    children: studentStats.firstYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  style: styles.yearStat,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearLabel,
-                    children: "2nd Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearNumber,
-                    children: studentStats.secondYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  style: styles.yearStat,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearLabel,
-                    children: "3rd Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearNumber,
-                    children: studentStats.thirdYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  style: styles.yearStat,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearLabel,
-                    children: "4th Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                    style: styles.yearNumber,
-                    children: studentStats.fourthYear
-                  })]
-                })]
+                children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  style: {
+                    textAlign: 'center',
+                    padding: '40px',
+                    color: '#666'
+                  },
+                  children: "Loading..."
+                }) : dashboardData.studentsBySemester.slice(0, 4).map(function (sem, index) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                    style: styles.yearStat,
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      style: styles.yearLabel,
+                      children: [sem.semester === 1 ? '1st' : sem.semester === 2 ? '2nd' : sem.semester === 3 ? '3rd' : sem.semester + 'th', " Year:"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                      style: styles.yearNumber,
+                      children: sem.count
+                    })]
+                  }, index);
+                })
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               style: styles.chartCard,
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
                 style: styles.chartTitle,
                 children: "STUDENTS PER DEPARTMENT"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              }), loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                style: {
+                  textAlign: 'center',
+                  padding: '40px',
+                  color: '#666'
+                },
+                children: "Loading..."
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                 style: styles.chartContainer,
-                children: departmentData.map(function (dept, index) {
+                children: dashboardData.studentsByDepartment.map(function (dept, index) {
+                  var maxStudents = Math.max.apply(Math, _toConsumableArray(dashboardData.studentsByDepartment.map(function (d) {
+                    return d.students;
+                  })).concat([1]));
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                     style: styles.chartBar,
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -63051,7 +64046,7 @@ function Example() {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                       style: {
                         width: '100%',
-                        height: "".concat(dept.students / 600 * 150, "px"),
+                        height: "".concat(dept.students / maxStudents * 150, "px"),
                         backgroundColor: dept.color,
                         borderRadius: '4px 4px 0 0'
                       }
@@ -63065,25 +64060,34 @@ function Example() {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             style: styles.rightSidebar,
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               style: styles.pieChartCard,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                style: styles.pieChart
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                style: styles.legend,
-                children: departmentData.map(function (dept, index) {
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                    style: styles.legendItem,
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                      style: _objectSpread(_objectSpread({}, styles.legendColor), {}, {
-                        backgroundColor: dept.color
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                      children: [dept.name, ": ", dept.students]
-                    })]
-                  }, index);
-                })
-              })]
+              children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                style: {
+                  textAlign: 'center',
+                  padding: '40px',
+                  color: '#666'
+                },
+                children: "Loading..."
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  style: styles.pieChart
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                  style: styles.legend,
+                  children: dashboardData.studentsByDepartment.map(function (dept, index) {
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                      style: styles.legendItem,
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                        style: _objectSpread(_objectSpread({}, styles.legendColor), {}, {
+                          backgroundColor: dept.color
+                        })
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+                        children: [dept.name, ": ", dept.students]
+                      })]
+                    }, index);
+                  })
+                })]
+              })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               style: styles.noticeCard,
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -63136,6 +64140,10 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -63158,9 +64166,24 @@ function Home() {
     _useState6 = _slicedToArray(_useState5, 2),
     isMobile = _useState6[0],
     setIsMobile = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      totalStudents: 0,
+      totalDepartments: 0,
+      totalCourses: 0,
+      totalInstructors: 0,
+      studentsByDepartment: [],
+      studentsBySemester: []
+    }),
+    _useState8 = _slicedToArray(_useState7, 2),
+    dashboardData = _useState8[0],
+    setDashboardData = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState0 = _slicedToArray(_useState9, 2),
+    loading = _useState0[0],
+    setLoading = _useState0[1];
 
   // Get user data from URL params or localStorage (for demo)
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+  var _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
       var urlParams = new URLSearchParams(window.location.search);
       return {
         firstName: urlParams.get('firstName') || 'John',
@@ -63169,9 +64192,9 @@ function Home() {
         email: urlParams.get('email') || 'user@example.com'
       };
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    user = _useState8[0],
-    setUser = _useState8[1];
+    _useState10 = _slicedToArray(_useState1, 2),
+    user = _useState10[0],
+    setUser = _useState10[1];
 
   // Handle window resize
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
@@ -63182,6 +64205,99 @@ function Home() {
     return function () {
       return window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // Fetch dashboard data from API
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var fetchDashboardData = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+        var _yield$Promise$all, _yield$Promise$all2, studentsRes, departmentsRes, coursesRes, instructorsRes, _yield$Promise$all3, _yield$Promise$all4, students, departments, courses, instructors, studentsByDepartment, studentsBySemester, _t;
+        return _regenerator().w(function (_context) {
+          while (1) switch (_context.p = _context.n) {
+            case 0:
+              _context.p = 0;
+              setLoading(true);
+              _context.n = 1;
+              return Promise.all([fetch('/api/students'), fetch('/api/departments'), fetch('/api/courses'), fetch('/api/instructors')]);
+            case 1:
+              _yield$Promise$all = _context.v;
+              _yield$Promise$all2 = _slicedToArray(_yield$Promise$all, 4);
+              studentsRes = _yield$Promise$all2[0];
+              departmentsRes = _yield$Promise$all2[1];
+              coursesRes = _yield$Promise$all2[2];
+              instructorsRes = _yield$Promise$all2[3];
+              _context.n = 2;
+              return Promise.all([studentsRes.json(), departmentsRes.json(), coursesRes.json(), instructorsRes.json()]);
+            case 2:
+              _yield$Promise$all3 = _context.v;
+              _yield$Promise$all4 = _slicedToArray(_yield$Promise$all3, 4);
+              students = _yield$Promise$all4[0];
+              departments = _yield$Promise$all4[1];
+              courses = _yield$Promise$all4[2];
+              instructors = _yield$Promise$all4[3];
+              // Process data for charts
+              studentsByDepartment = departments.map(function (dept) {
+                return {
+                  name: dept.code || dept.name,
+                  students: students.filter(function (student) {
+                    return student.department_id === dept.id;
+                  }).length,
+                  color: "hsl(".concat(Math.random() * 360, ", 70%, 50%)")
+                };
+              });
+              studentsBySemester = [1, 2, 3, 4, 5, 6, 7, 8].map(function (sem) {
+                return {
+                  semester: sem,
+                  count: students.filter(function (student) {
+                    return student.current_semester === sem;
+                  }).length
+                };
+              });
+              setDashboardData({
+                totalStudents: students.length,
+                totalDepartments: departments.length,
+                totalCourses: courses.length,
+                totalInstructors: instructors.length,
+                studentsByDepartment: studentsByDepartment,
+                studentsBySemester: studentsBySemester
+              });
+              _context.n = 4;
+              break;
+            case 3:
+              _context.p = 3;
+              _t = _context.v;
+              console.error('Error fetching dashboard data:', _t);
+              // Fallback to sample data if API fails
+              setDashboardData({
+                totalStudents: 0,
+                totalDepartments: 2,
+                totalCourses: 0,
+                totalInstructors: 0,
+                studentsByDepartment: [{
+                  name: 'CS',
+                  students: 0,
+                  color: '#4CAF50'
+                }, {
+                  name: 'MATH',
+                  students: 0,
+                  color: '#2196F3'
+                }],
+                studentsBySemester: []
+              });
+            case 4:
+              _context.p = 4;
+              setLoading(false);
+              return _context.f(4);
+            case 5:
+              return _context.a(2);
+          }
+        }, _callee, null, [[0, 3, 4, 5]]);
+      }));
+      return function fetchDashboardData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    fetchDashboardData();
   }, []);
 
   // Apply global styles to ensure full-width
@@ -63202,36 +64318,6 @@ function Home() {
   var handleLogout = function handleLogout() {
     window.location.href = '/';
   };
-
-  // Sample data - same as Example.js
-  var studentStats = {
-    total: 2374,
-    firstYear: 900,
-    secondYear: 700,
-    thirdYear: 624,
-    fourthYear: 150
-  };
-  var departmentData = [{
-    name: 'CCS',
-    students: 600,
-    color: '#4CAF50'
-  }, {
-    name: 'COED',
-    students: 520,
-    color: '#2196F3'
-  }, {
-    name: 'CBA',
-    students: 480,
-    color: '#FF9800'
-  }, {
-    name: 'CCJE',
-    students: 460,
-    color: '#00BCD4'
-  }, {
-    name: 'CAHS',
-    students: 314,
-    color: '#9C27B0'
-  }];
   var styles = {
     container: {
       display: 'flex',
@@ -63320,13 +64406,13 @@ function Home() {
       position: 'relative'
     },
     header: {
-      backgroundColor: 'white',
+      backgroundColor: '#2c5530',
+      color: 'white',
       padding: isMobile ? '15px 20px' : '20px 30px',
-      borderBottom: '1px solid #e0e0e0',
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+      boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
       flexWrap: isMobile ? 'wrap' : 'nowrap',
       gap: isMobile ? '10px' : '0',
       boxSizing: 'border-box'
@@ -63339,7 +64425,7 @@ function Home() {
     pageTitle: {
       fontSize: '24px',
       fontWeight: '600',
-      color: '#2c5530',
+      color: 'white',
       margin: 0
     },
     searchContainer: {
@@ -63409,13 +64495,12 @@ function Home() {
       gap: isMobile ? '20px' : '30px',
       marginBottom: isMobile ? '20px' : '30px'
     },
-    // ... (copying other styles from Example.js)
     mobileMenuButton: {
       display: isMobile ? 'block' : 'none',
       backgroundColor: 'transparent',
       border: 'none',
       fontSize: '24px',
-      color: '#2c5530',
+      color: 'white',
       cursor: 'pointer',
       padding: '5px',
       marginRight: '15px'
@@ -63429,6 +64514,18 @@ function Home() {
       height: '100%',
       backgroundColor: 'rgba(0,0,0,0.5)',
       zIndex: 999
+    },
+    headerLogoPlaceholder: {
+      width: '40px',
+      height: '40px',
+      backgroundColor: '#4CAF50',
+      borderRadius: '10px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: '16px',
+      fontWeight: 'bold',
+      color: 'white'
     }
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -63472,19 +64569,9 @@ function Home() {
             style: styles.navIcon,
             children: "\uD83D\uDCC1"
           }), "ARCHIVE"]
-        }), user.userType === 'employee' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
           href: "#",
           style: styles.navItem,
-          onClick: function onClick(e) {
-            e.preventDefault();
-            var params = new URLSearchParams({
-              firstName: user.firstName,
-              lastName: user.lastName,
-              userType: user.userType,
-              email: user.email
-            });
-            window.location.href = "/admin?".concat(params.toString());
-          },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             style: styles.navIcon,
             children: "\u2699\uFE0F"
@@ -63506,7 +64593,6 @@ function Home() {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
           href: "#",
           style: styles.navItem,
-          onClick: handleLogout,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
             style: styles.navIcon,
             children: "\uD83D\uDEAA"
@@ -63525,9 +64611,12 @@ function Home() {
               return setIsMobileMenuOpen(!isMobileMenuOpen);
             },
             children: "\u2630"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            style: styles.headerLogoPlaceholder,
+            children: "\uD83C\uDF93"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
             style: styles.pageTitle,
-            children: ["Dashboard - Welcome, ", user.firstName, "!"]
+            children: "Castro University - Dashboard"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           style: {
@@ -63549,13 +64638,6 @@ function Home() {
               },
               style: styles.searchInput
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            style: _objectSpread(_objectSpread({}, styles.logoPlaceholder), {}, {
-              width: '40px',
-              height: '40px',
-              fontSize: '16px'
-            }),
-            children: "\uD83D\uDEE1\uFE0F"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             style: {
               display: 'flex',
@@ -63565,10 +64647,26 @@ function Home() {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
               style: {
                 fontSize: '14px',
-                color: '#2c5530',
+                color: 'white',
                 fontWeight: '600'
               },
               children: [user.userType === 'employee' ? '👔' : '🎓', " ", user.firstName, " ", user.lastName]
+            }), user.userType === 'employee' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              style: _objectSpread(_objectSpread({}, styles.logoutBtn), {}, {
+                backgroundColor: '#4CAF50',
+                marginRight: '10px'
+              }),
+              onClick: function onClick(e) {
+                e.preventDefault();
+                var params = new URLSearchParams({
+                  firstName: user.firstName,
+                  lastName: user.lastName,
+                  userType: user.userType,
+                  email: user.email
+                });
+                window.location.href = "/admin?".concat(params.toString());
+              },
+              children: "Admin Panel"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               style: styles.logoutBtn,
               onClick: handleLogout,
@@ -63588,6 +64686,106 @@ function Home() {
             children: ["You are logged in as a ", user.userType, ". Access your dashboard and manage your ", user.userType === 'employee' ? 'administrative tasks' : 'academic progress', "."]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          style: {
+            display: 'grid',
+            gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)',
+            gap: '20px',
+            marginBottom: '30px'
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            style: {
+              backgroundColor: 'white',
+              borderRadius: '15px',
+              padding: '25px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              textAlign: 'center'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '14px',
+                color: '#666',
+                marginBottom: '10px'
+              },
+              children: "Total Students"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '32px',
+                fontWeight: '700',
+                color: '#4CAF50'
+              },
+              children: loading ? '...' : dashboardData.totalStudents
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            style: {
+              backgroundColor: 'white',
+              borderRadius: '15px',
+              padding: '25px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              textAlign: 'center'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '14px',
+                color: '#666',
+                marginBottom: '10px'
+              },
+              children: "Departments"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '32px',
+                fontWeight: '700',
+                color: '#2196F3'
+              },
+              children: loading ? '...' : dashboardData.totalDepartments
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            style: {
+              backgroundColor: 'white',
+              borderRadius: '15px',
+              padding: '25px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              textAlign: 'center'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '14px',
+                color: '#666',
+                marginBottom: '10px'
+              },
+              children: "Courses"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '32px',
+                fontWeight: '700',
+                color: '#FF9800'
+              },
+              children: loading ? '...' : dashboardData.totalCourses
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            style: {
+              backgroundColor: 'white',
+              borderRadius: '15px',
+              padding: '25px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              textAlign: 'center'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '14px',
+                color: '#666',
+                marginBottom: '10px'
+              },
+              children: "Instructors"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              style: {
+                fontSize: '32px',
+                fontWeight: '700',
+                color: '#9C27B0'
+              },
+              children: loading ? '...' : dashboardData.totalInstructors
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           style: styles.statsGrid,
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             style: {
@@ -63604,114 +64802,54 @@ function Home() {
                 border: 'none',
                 boxSizing: 'border-box'
               },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h3", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
                 style: {
                   fontSize: '18px',
                   fontWeight: '600',
                   color: '#2c5530',
                   marginBottom: '15px'
                 },
-                children: ["TOTAL STUDENTS: ", studentStats.total]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                children: "Students by Semester"
+              }), loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                style: {
+                  textAlign: 'center',
+                  padding: '40px',
+                  color: '#666'
+                },
+                children: "Loading..."
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 style: {
                   display: 'grid',
-                  gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(2, 1fr)',
+                  gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)',
                   gap: isMobile ? '10px' : '15px',
                   marginTop: '20px'
                 },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  style: {
-                    textAlign: 'center',
-                    padding: '15px',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '10px'
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                children: dashboardData.studentsBySemester.slice(0, 8).map(function (sem, index) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     style: {
-                      fontSize: '12px',
-                      color: '#666',
-                      marginBottom: '5px',
-                      fontWeight: '500'
+                      textAlign: 'center',
+                      padding: '15px',
+                      backgroundColor: '#f8f9fa',
+                      borderRadius: '10px'
                     },
-                    children: "1st Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      color: '#2c5530'
-                    },
-                    children: studentStats.firstYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  style: {
-                    textAlign: 'center',
-                    padding: '15px',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '10px'
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '12px',
-                      color: '#666',
-                      marginBottom: '5px',
-                      fontWeight: '500'
-                    },
-                    children: "2nd Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      color: '#2c5530'
-                    },
-                    children: studentStats.secondYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  style: {
-                    textAlign: 'center',
-                    padding: '15px',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '10px'
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '12px',
-                      color: '#666',
-                      marginBottom: '5px',
-                      fontWeight: '500'
-                    },
-                    children: "3rd Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      color: '#2c5530'
-                    },
-                    children: studentStats.thirdYear
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  style: {
-                    textAlign: 'center',
-                    padding: '15px',
-                    backgroundColor: '#f8f9fa',
-                    borderRadius: '10px'
-                  },
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '12px',
-                      color: '#666',
-                      marginBottom: '5px',
-                      fontWeight: '500'
-                    },
-                    children: "4th Year:"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    style: {
-                      fontSize: '24px',
-                      fontWeight: '700',
-                      color: '#2c5530'
-                    },
-                    children: studentStats.fourthYear
-                  })]
-                })]
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                      style: {
+                        fontSize: '12px',
+                        color: '#666',
+                        marginBottom: '5px',
+                        fontWeight: '500'
+                      },
+                      children: ["Semester ", sem.semester, ":"]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                      style: {
+                        fontSize: '24px',
+                        fontWeight: '700',
+                        color: '#2c5530'
+                      },
+                      children: sem.count
+                    })]
+                  }, index);
+                })
               })]
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -63721,6 +64859,67 @@ function Home() {
               gap: '20px'
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              style: {
+                backgroundColor: 'white',
+                borderRadius: '15px',
+                padding: '25px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                border: 'none'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
+                style: {
+                  color: '#2c5530',
+                  marginBottom: '15px',
+                  fontSize: '16px',
+                  fontWeight: '600'
+                },
+                children: "Students by Department"
+              }), loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                style: {
+                  textAlign: 'center',
+                  padding: '20px',
+                  color: '#666'
+                },
+                children: "Loading..."
+              }) : dashboardData.studentsByDepartment.length > 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                style: {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px'
+                },
+                children: dashboardData.studentsByDepartment.map(function (dept, index) {
+                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                    style: {
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      padding: '8px 0'
+                    },
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      style: {
+                        fontSize: '14px',
+                        fontWeight: '500'
+                      },
+                      children: dept.name
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      style: {
+                        fontSize: '14px',
+                        fontWeight: '700',
+                        color: dept.color
+                      },
+                      children: dept.students
+                    })]
+                  }, index);
+                })
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                style: {
+                  textAlign: 'center',
+                  padding: '20px',
+                  color: '#666'
+                },
+                children: "No departments found"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               style: {
                 backgroundColor: 'white',
                 borderRadius: '15px',
@@ -63765,27 +64964,6 @@ function Home() {
                   children: user.userType === 'employee' ? 'Generate Reports' : 'Course Schedule'
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-              style: {
-                backgroundColor: '#f8f9fa',
-                borderRadius: '15px',
-                padding: '25px',
-                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                border: 'none',
-                textAlign: 'center',
-                minHeight: '120px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                style: {
-                  color: '#666',
-                  fontSize: '16px',
-                  fontWeight: '600'
-                },
-                children: "NOTICE"
-              })
             })]
           })]
         })]
@@ -63933,7 +65111,7 @@ function Login(_ref) {
   };
   var handleSubmit = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee(e) {
-      var _t;
+      var url, payload, response, data, _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
@@ -63946,39 +65124,67 @@ function Login(_ref) {
           case 1:
             setIsLoading(true);
             _context.p = 2;
+            url = isSignup ? '/api/register' : '/api/login';
+            payload = isSignup ? {
+              first_name: formData.firstName,
+              last_name: formData.lastName,
+              email: formData.email,
+              password: formData.password,
+              password_confirmation: formData.confirmPassword,
+              user_type: userType,
+              student_id: formData.studentId,
+              employee_id: formData.employeeId,
+              department: formData.department
+            } : {
+              email: formData.email,
+              password: formData.password
+            };
             _context.n = 3;
-            return new Promise(function (resolve) {
-              return setTimeout(resolve, 2000);
+            return fetch(url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(payload)
             });
           case 3:
-            // For demo purposes, always succeed
-            if (onLoginSuccess) {
-              onLoginSuccess({
-                email: formData.email,
-                firstName: formData.firstName || 'User',
-                lastName: formData.lastName || '',
-                userType: userType,
-                studentId: formData.studentId,
-                employeeId: formData.employeeId,
-                department: formData.department
-              });
-            }
-            _context.n = 5;
-            break;
+            response = _context.v;
+            _context.n = 4;
+            return response.json();
           case 4:
-            _context.p = 4;
-            _t = _context.v;
-            setErrors({
-              general: 'An error occurred. Please try again.'
-            });
+            data = _context.v;
+            if (data.success) {
+              if (onLoginSuccess) {
+                onLoginSuccess(data.user);
+              }
+            } else {
+              if (data.errors) {
+                // Handle validation errors
+                setErrors(data.errors);
+              } else {
+                setErrors({
+                  general: data.message || 'An error occurred. Please try again.'
+                });
+              }
+            }
+            _context.n = 6;
+            break;
           case 5:
             _context.p = 5;
-            setIsLoading(false);
-            return _context.f(5);
+            _t = _context.v;
+            console.error('Auth error:', _t);
+            setErrors({
+              general: 'Network error. Please check your connection and try again.'
+            });
           case 6:
+            _context.p = 6;
+            setIsLoading(false);
+            return _context.f(6);
+          case 7:
             return _context.a(2);
         }
-      }, _callee, null, [[2, 4, 5, 6]]);
+      }, _callee, null, [[2, 5, 6, 7]]);
     }));
     return function handleSubmit(_x) {
       return _ref2.apply(this, arguments);

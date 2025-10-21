@@ -4,10 +4,18 @@ import Login from './Login';
 
 function Example() {
     const [searchTerm, setSearchTerm] = useState('');
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [showLogin, setShowLogin] = useState(false);
     const [user, setUser] = useState(null);
+    const [dashboardData, setDashboardData] = useState({
+        totalStudents: 0,
+        totalDepartments: 0,
+        totalCourses: 0,
+        totalInstructors: 0,
+        studentsByDepartment: [],
+        studentsBySemester: []
+    });
+    const [loading, setLoading] = useState(true);
 
     // Handle window resize
     useEffect(() => {
@@ -16,6 +24,67 @@ function Example() {
         };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Fetch dashboard data from API
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                setLoading(true);
+                const [studentsRes, departmentsRes, coursesRes, instructorsRes] = await Promise.all([
+                    fetch('/api/students'),
+                    fetch('/api/departments'),
+                    fetch('/api/courses'),
+                    fetch('/api/instructors')
+                ]);
+
+                const [students, departments, courses, instructors] = await Promise.all([
+                    studentsRes.json(),
+                    departmentsRes.json(),
+                    coursesRes.json(),
+                    instructorsRes.json()
+                ]);
+
+                // Process data for charts
+                const studentsByDepartment = departments.map(dept => ({
+                    name: dept.code || dept.name,
+                    students: students.filter(student => student.department_id === dept.id).length,
+                    color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                }));
+
+                const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
+                    semester: sem,
+                    count: students.filter(student => student.current_semester === sem).length
+                }));
+
+                setDashboardData({
+                    totalStudents: students.length,
+                    totalDepartments: departments.length,
+                    totalCourses: courses.length,
+                    totalInstructors: instructors.length,
+                    studentsByDepartment,
+                    studentsBySemester
+                });
+            } catch (error) {
+                console.error('Error fetching dashboard data:', error);
+                // Fallback to sample data if API fails
+                setDashboardData({
+                    totalStudents: 0,
+                    totalDepartments: 2,
+                    totalCourses: 0,
+                    totalInstructors: 0,
+                    studentsByDepartment: [
+                        { name: 'CS', students: 0, color: '#4CAF50' },
+                        { name: 'MATH', students: 0, color: '#2196F3' }
+                    ],
+                    studentsBySemester: []
+                });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
     }, []);
 
     // Apply global styles to ensure full-width
@@ -77,22 +146,6 @@ function Example() {
         // You can add more logout logic here
     };
 
-    // Sample data - replace with real data
-    const studentStats = {
-        total: 2374,
-        firstYear: 900,
-        secondYear: 700,
-        thirdYear: 624,
-        fourthYear: 150
-    };
-
-    const departmentData = [
-        { name: 'CCS', students: 600, color: '#4CAF50' },
-        { name: 'COED', students: 520, color: '#2196F3' },
-        { name: 'CBA', students: 480, color: '#FF9800' },
-        { name: 'CCJE', students: 460, color: '#00BCD4' },
-        { name: 'CAHS', students: 314, color: '#9C27B0' }
-    ];
 
     const styles = {
         body: {
@@ -105,99 +158,38 @@ function Example() {
             overflow: 'hidden'
         },
         container: {
-            display: 'flex',
             minHeight: '100vh',
             backgroundColor: '#f8f9fa',
             width: '100vw',
             height: '100vh',
             margin: 0,
-            padding: 0,
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0
-        },
-        sidebar: {
-            width: isMobile ? (isMobileMenuOpen ? '250px' : '0') : '250px',
-            backgroundColor: '#2c5530',
-            color: 'white',
-            padding: '0',
-            boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
-            position: 'fixed',
-            height: '100vh',
-            overflowY: 'auto',
-            transition: 'width 0.3s ease',
-            zIndex: 1000,
-            overflow: 'hidden'
-        },
-        logoSection: {
-            padding: '30px 20px',
-            borderBottom: '1px solid rgba(255,255,255,0.1)',
-            textAlign: 'center'
+            padding: 0
         },
         logoPlaceholder: {
-            width: '80px',
-            height: '80px',
+            width: '40px',
+            height: '40px',
             backgroundColor: '#4CAF50',
             borderRadius: '10px',
-            margin: '0 auto 15px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: 'white',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
-        },
-        logoText: {
             fontSize: '16px',
-            fontWeight: '600',
-            color: '#ffffff',
-            margin: 0
-        },
-        nav: {
-            padding: '20px 0'
-        },
-        navItem: {
-            display: 'flex',
-            alignItems: 'center',
-            padding: '15px 25px',
-            color: 'white',
-            textDecoration: 'none',
-            transition: 'all 0.3s ease',
-            borderLeft: '4px solid transparent',
-            fontSize: '14px',
-            fontWeight: '500'
-        },
-        navItemActive: {
-            backgroundColor: 'rgba(76, 175, 80, 0.2)',
-            borderLeftColor: '#4CAF50',
-            color: '#4CAF50'
-        },
-        navIcon: {
-            marginRight: '15px',
-            fontSize: '18px',
-            width: '20px'
+            fontWeight: 'bold',
+            color: 'white'
         },
         content: {
-            marginLeft: isMobile ? '0' : '250px',
-            flex: 1,
-            padding: '0',
-            transition: 'margin-left 0.3s ease',
-            width: isMobile ? '100vw' : 'calc(100vw - 250px)',
-            height: '100vh',
-            overflow: 'auto',
-            position: 'relative'
+            width: '100%',
+            minHeight: '100vh',
+            padding: '0'
         },
         header: {
-            backgroundColor: 'white',
+            backgroundColor: '#2c5530',
+            color: 'white',
             padding: isMobile ? '15px 20px' : '20px 30px',
-            borderBottom: '1px solid #e0e0e0',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            boxShadow: '0 2px 10px rgba(0,0,0,0.05)',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
             flexWrap: isMobile ? 'wrap' : 'nowrap',
             gap: isMobile ? '10px' : '0',
             boxSizing: 'border-box'
@@ -210,7 +202,7 @@ function Example() {
         pageTitle: {
             fontSize: '24px',
             fontWeight: '600',
-            color: '#2c5530',
+            color: 'white',
             margin: 0
         },
         searchContainer: {
@@ -435,88 +427,19 @@ function Example() {
             fontSize: '16px',
             fontWeight: '600'
         },
-        mobileMenuButton: {
-            display: isMobile ? 'block' : 'none',
-            backgroundColor: 'transparent',
-            border: 'none',
-            fontSize: '24px',
-            color: '#2c5530',
-            cursor: 'pointer',
-            padding: '5px',
-            marginRight: '15px'
-        },
-        mobileOverlay: {
-            display: isMobile && isMobileMenuOpen ? 'block' : 'none',
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            zIndex: 999
-        }
     };
 
     return (
         <div style={styles.container}>
-            {/* Mobile Overlay */}
-            <div
-                style={styles.mobileOverlay}
-                onClick={() => setIsMobileMenuOpen(false)}
-            ></div>
-
-            {/* Sidebar */}
-            <aside style={styles.sidebar}>
-                    <div style={styles.logoSection}>
-                        <div style={styles.logoPlaceholder}>
-                            🎓
-                        </div>
-                        <p style={styles.logoText}>Castro University</p>
-                    </div>
-                    <nav style={styles.nav}>
-                        <a href="#" style={{...styles.navItem, ...styles.navItemActive}}>
-                            <span style={styles.navIcon}>🏠</span>
-                            HOME
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>📅</span>
-                            EVENTS
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>📁</span>
-                            ARCHIVE
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>⚙️</span>
-                            ADMIN
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>💬</span>
-                            FORUM
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>👤</span>
-                            PROFILE
-                        </a>
-                        <a href="#" style={styles.navItem}>
-                            <span style={styles.navIcon}>🚪</span>
-                            LOG OUT
-                        </a>
-                    </nav>
-                </aside>
-
-                {/* Main Content */}
-                <main style={styles.content}>
+            {/* Main Content */}
+            <main style={styles.content}>
                     <header style={styles.header}>
                         <div style={styles.headerLeft}>
-                            <button
-                                style={styles.mobileMenuButton}
-                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            >
-                                ☰
-                            </button>
+                            <div style={styles.logoPlaceholder}>
+                                🎓
+                            </div>
                             <h1 style={styles.pageTitle}>
-                                Landing Page - {user ? `Welcome, ${user.firstName}` : 'logged out'}
+                                Castro University - Landing Page
                             </h1>
                         </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
@@ -578,61 +501,68 @@ function Example() {
                             <div style={styles.statsLeft}>
                                 {/* Total Students */}
                                 <div style={styles.totalStudentsCard}>
-                                    <h3 style={styles.totalStudentsTitle}>TOTAL STUDENTS: {studentStats.total}</h3>
+                                    <h3 style={styles.totalStudentsTitle}>TOTAL STUDENTS: {loading ? '...' : dashboardData.totalStudents}</h3>
                                     <div style={styles.yearStatsContainer}>
-                                        <div style={styles.yearStat}>
-                                            <div style={styles.yearLabel}>1st Year:</div>
-                                            <div style={styles.yearNumber}>{studentStats.firstYear}</div>
-                                        </div>
-                                        <div style={styles.yearStat}>
-                                            <div style={styles.yearLabel}>2nd Year:</div>
-                                            <div style={styles.yearNumber}>{studentStats.secondYear}</div>
-                                        </div>
-                                        <div style={styles.yearStat}>
-                                            <div style={styles.yearLabel}>3rd Year:</div>
-                                            <div style={styles.yearNumber}>{studentStats.thirdYear}</div>
-                                        </div>
-                                        <div style={styles.yearStat}>
-                                            <div style={styles.yearLabel}>4th Year:</div>
-                                            <div style={styles.yearNumber}>{studentStats.fourthYear}</div>
-                                        </div>
+                                        {loading ? (
+                                            <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                        ) : (
+                                            dashboardData.studentsBySemester.slice(0, 4).map((sem, index) => (
+                                                <div key={index} style={styles.yearStat}>
+                                                    <div style={styles.yearLabel}>{sem.semester === 1 ? '1st' : sem.semester === 2 ? '2nd' : sem.semester === 3 ? '3rd' : sem.semester + 'th'} Year:</div>
+                                                    <div style={styles.yearNumber}>{sem.count}</div>
+                                                </div>
+                                            ))
+                                        )}
                                     </div>
                                 </div>
 
                                 {/* Department Chart */}
                                 <div style={styles.chartCard}>
                                     <h3 style={styles.chartTitle}>STUDENTS PER DEPARTMENT</h3>
-                                    <div style={styles.chartContainer}>
-                                        {departmentData.map((dept, index) => (
-                                            <div key={index} style={styles.chartBar}>
-                                                <div style={styles.barValue}>{dept.students}</div>
-                                                <div
-                                                    style={{
-                                                        width: '100%',
-                                                        height: `${(dept.students / 600) * 150}px`,
-                                                        backgroundColor: dept.color,
-                                                        borderRadius: '4px 4px 0 0'
-                                                    }}
-                                                ></div>
-                                                <div style={styles.barLabel}>{dept.name}</div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    {loading ? (
+                                        <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                    ) : (
+                                        <div style={styles.chartContainer}>
+                                            {dashboardData.studentsByDepartment.map((dept, index) => {
+                                                const maxStudents = Math.max(...dashboardData.studentsByDepartment.map(d => d.students), 1);
+                                                return (
+                                                    <div key={index} style={styles.chartBar}>
+                                                        <div style={styles.barValue}>{dept.students}</div>
+                                                        <div
+                                                            style={{
+                                                                width: '100%',
+                                                                height: `${(dept.students / maxStudents) * 150}px`,
+                                                                backgroundColor: dept.color,
+                                                                borderRadius: '4px 4px 0 0'
+                                                            }}
+                                                        ></div>
+                                                        <div style={styles.barLabel}>{dept.name}</div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
                             <div style={styles.rightSidebar}>
                                 {/* Pie Chart */}
                                 <div style={styles.pieChartCard}>
-                                    <div style={styles.pieChart}></div>
-                                    <div style={styles.legend}>
-                                        {departmentData.map((dept, index) => (
-                                            <div key={index} style={styles.legendItem}>
-                                                <div style={{...styles.legendColor, backgroundColor: dept.color}}></div>
-                                                <span>{dept.name}: {dept.students}</span>
+                                    {loading ? (
+                                        <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                    ) : (
+                                        <>
+                                            <div style={styles.pieChart}></div>
+                                            <div style={styles.legend}>
+                                                {dashboardData.studentsByDepartment.map((dept, index) => (
+                                                    <div key={index} style={styles.legendItem}>
+                                                        <div style={{...styles.legendColor, backgroundColor: dept.color}}></div>
+                                                        <span>{dept.name}: {dept.students}</span>
+                                                    </div>
+                                                ))}
                                             </div>
-                                        ))}
-                                    </div>
+                                        </>
+                                    )}
                                 </div>
 
                                 {/* Notice */}

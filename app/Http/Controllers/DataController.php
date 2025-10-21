@@ -25,7 +25,17 @@ class DataController extends Controller
 
     public function fetchData()
     {
-        $data = Demo::all(); // Fetch all records from the demo table
+        $data = Demo::all(); // Fetch all active (non-archived) records from the demo table
+        return response()->json($data);
+    }
+
+    public function fetchArchivedData()
+    {
+        $data = Demo::onlyTrashed()->get(); // Fetch only soft-deleted (archived) records
+        // Add deleted_at as archived_at for frontend consistency
+        $data->each(function ($item) {
+            $item->archived_at = $item->deleted_at;
+        });
         return response()->json($data);
     }
 
@@ -48,10 +58,18 @@ class DataController extends Controller
     }
 
     public function destroy($id)
-{
-    $data = Demo::findOrFail($id); // replace Demo with your model
-    $data->delete();
+    {
+        $data = Demo::findOrFail($id); // replace Demo with your model
+        $data->delete();
 
-    return response()->json(['message' => 'Data deleted successfully']);
-}
+        return response()->json(['message' => 'Data deleted successfully']);
+    }
+
+    public function archive($id)
+    {
+        $data = Demo::findOrFail($id);
+        $data->delete(); // This will soft delete the record
+
+        return response()->json(['message' => 'Data archived successfully']);
+    }
 }

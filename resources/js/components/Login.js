@@ -99,23 +99,48 @@ function Login({ onClose, onLoginSuccess, userType = 'student' }) {
         setIsLoading(true);
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            const url = isSignup ? '/api/register' : '/api/login';
+            const payload = isSignup ? {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.email,
+                password: formData.password,
+                password_confirmation: formData.confirmPassword,
+                user_type: userType,
+                student_id: formData.studentId,
+                employee_id: formData.employeeId,
+                department: formData.department
+            } : {
+                email: formData.email,
+                password: formData.password
+            };
 
-            // For demo purposes, always succeed
-            if (onLoginSuccess) {
-                onLoginSuccess({
-                    email: formData.email,
-                    firstName: formData.firstName || 'User',
-                    lastName: formData.lastName || '',
-                    userType: userType,
-                    studentId: formData.studentId,
-                    employeeId: formData.employeeId,
-                    department: formData.department
-                });
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                if (onLoginSuccess) {
+                    onLoginSuccess(data.user);
+                }
+            } else {
+                if (data.errors) {
+                    // Handle validation errors
+                    setErrors(data.errors);
+                } else {
+                    setErrors({ general: data.message || 'An error occurred. Please try again.' });
+                }
             }
         } catch (error) {
-            setErrors({ general: 'An error occurred. Please try again.' });
+            console.error('Auth error:', error);
+            setErrors({ general: 'Network error. Please check your connection and try again.' });
         } finally {
             setIsLoading(false);
         }
