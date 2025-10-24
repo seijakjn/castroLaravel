@@ -27,6 +27,10 @@ Route::get('/admin', function () {
     return view('admin');
 });
 
+Route::get('/employee-home', function () {
+    return view('employee-home');
+});
+
 // Legacy routes (keeping for backward compatibility)
 Route::post('/api/save-data', [DataController::class, 'store']);
 Route::get('/fetch-data', [DataController::class, 'fetchData']);
@@ -55,5 +59,12 @@ Route::post('/api/courses', [ProfileManagementController::class, 'storeCourse'])
 Route::put('/api/courses/{id}', [ProfileManagementController::class, 'updateCourse']);
 Route::put('/api/courses/{id}/archive', [ProfileManagementController::class, 'archiveCourse']);
 
-// Instructors
+// Faculty
+Route::get('/api/faculty', [ProfileManagementController::class, 'getFaculty']);
+Route::get('/api/faculty/archived', [ProfileManagementController::class, 'getArchivedFaculty']);
+Route::post('/api/faculty', [ProfileManagementController::class, 'storeFaculty']);
+Route::put('/api/faculty/{id}', [ProfileManagementController::class, 'updateFaculty']);
+Route::put('/api/faculty/{id}/archive', [ProfileManagementController::class, 'archiveFaculty']);
+
+// Instructors (Legacy)
 Route::get('/api/instructors', [ProfileManagementController::class, 'getInstructors']);

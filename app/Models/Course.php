@@ -17,7 +17,8 @@ class Course extends Model
         'credits',
         'semester',
         'department_id',
-        'instructor',
+        'faculty_id',
+        'instructor', // Keep for backward compatibility during transition
         'max_students',
         'status'
     ];
@@ -25,5 +26,19 @@ class Course extends Model
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
+
+    // Helper method to get instructor name (prioritizes faculty relationship)
+    public function getInstructorNameAttribute()
+    {
+        if ($this->faculty) {
+            return $this->faculty->first_name . ' ' . $this->faculty->last_name;
+        }
+        return $this->instructor ?: 'TBA';
     }
 }

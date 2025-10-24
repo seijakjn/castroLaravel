@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Icons } from './SvgIcons';
 
 function Login({ onClose, onLoginSuccess, userType = 'student' }) {
     const [isSignup, setIsSignup] = useState(false);
@@ -370,7 +371,7 @@ function Login({ onClose, onLoginSuccess, userType = 'student' }) {
 
                 <div style={styles.header}>
                     <div style={styles.logo}>
-                        {userType === 'employee' ? '👔' : '🎓'}
+                        {userType === 'employee' ? <Icons.Employee size={24} color="white" /> : <Icons.Student size={24} color="white" />}
                     </div>
                     <h2 style={styles.title}>
                         {isSignup

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Login from './Login';
+import { Icons } from './SvgIcons';
+import PieChart from './PieChart';
 
 function Example() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -12,8 +14,10 @@ function Example() {
         totalDepartments: 0,
         totalCourses: 0,
         totalInstructors: 0,
+        totalFaculty: 0,
         studentsByDepartment: [],
-        studentsBySemester: []
+        studentsBySemester: [],
+        facultyByDepartment: []
     });
     const [loading, setLoading] = useState(true);
 
@@ -31,18 +35,20 @@ function Example() {
         const fetchDashboardData = async () => {
             try {
                 setLoading(true);
-                const [studentsRes, departmentsRes, coursesRes, instructorsRes] = await Promise.all([
+                const [studentsRes, departmentsRes, coursesRes, instructorsRes, facultyRes] = await Promise.all([
                     fetch('/api/students'),
                     fetch('/api/departments'),
                     fetch('/api/courses'),
-                    fetch('/api/instructors')
+                    fetch('/api/instructors'),
+                    fetch('/api/faculty')
                 ]);
 
-                const [students, departments, courses, instructors] = await Promise.all([
+                const [students, departments, courses, instructors, faculty] = await Promise.all([
                     studentsRes.json(),
                     departmentsRes.json(),
                     coursesRes.json(),
-                    instructorsRes.json()
+                    instructorsRes.json(),
+                    facultyRes.json()
                 ]);
 
                 // Process data for charts
@@ -50,6 +56,12 @@ function Example() {
                     name: dept.code || dept.name,
                     students: students.filter(student => student.department_id === dept.id).length,
                     color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                }));
+
+                const facultyByDepartment = departments.map(dept => ({
+                    name: dept.code || dept.name,
+                    faculty: faculty.filter(fac => fac.department_id === dept.id).length,
+                    color: `hsl(${Math.random() * 360}, 70%, 60%)`
                 }));
 
                 const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
@@ -62,22 +74,42 @@ function Example() {
                     totalDepartments: departments.length,
                     totalCourses: courses.length,
                     totalInstructors: instructors.length,
+                    totalFaculty: faculty.length,
                     studentsByDepartment,
-                    studentsBySemester
+                    studentsBySemester,
+                    facultyByDepartment
                 });
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
                 // Fallback to sample data if API fails
                 setDashboardData({
-                    totalStudents: 0,
-                    totalDepartments: 2,
-                    totalCourses: 0,
-                    totalInstructors: 0,
+                    totalStudents: 245,
+                    totalDepartments: 4,
+                    totalCourses: 32,
+                    totalInstructors: 18,
+                    totalFaculty: 15,
                     studentsByDepartment: [
-                        { name: 'CS', students: 0, color: '#4CAF50' },
-                        { name: 'MATH', students: 0, color: '#2196F3' }
+                        { name: 'Computer Science', students: 85, color: '#4CAF50' },
+                        { name: 'Mathematics', students: 62, color: '#2196F3' },
+                        { name: 'Engineering', students: 73, color: '#FF9800' },
+                        { name: 'Business', students: 25, color: '#9C27B0' }
                     ],
-                    studentsBySemester: []
+                    facultyByDepartment: [
+                        { name: 'Computer Science', faculty: 5, color: '#4CAF50' },
+                        { name: 'Mathematics', faculty: 4, color: '#2196F3' },
+                        { name: 'Engineering', faculty: 4, color: '#FF9800' },
+                        { name: 'Business', faculty: 2, color: '#9C27B0' }
+                    ],
+                    studentsBySemester: [
+                        { semester: 1, count: 45 },
+                        { semester: 2, count: 38 },
+                        { semester: 3, count: 42 },
+                        { semester: 4, count: 35 },
+                        { semester: 5, count: 28 },
+                        { semester: 6, count: 22 },
+                        { semester: 7, count: 20 },
+                        { semester: 8, count: 15 }
+                    ]
                 });
             } finally {
                 setLoading(false);
@@ -130,14 +162,21 @@ function Example() {
 
     // Handle login success
     const handleLoginSuccess = (userData) => {
-        // Redirect to home page with user data
+        // Redirect based on user type
         const params = new URLSearchParams({
             firstName: userData.firstName,
             lastName: userData.lastName,
             userType: userData.userType,
             email: userData.email
         });
-        window.location.href = `/home?${params.toString()}`;
+
+        if (userData.userType === 'employee') {
+            // Employees go to their dedicated homepage
+            window.location.href = `/employee-home?${params.toString()}`;
+        } else {
+            // Students go to home page
+            window.location.href = `/home?${params.toString()}`;
+        }
     };
 
     // Handle logout
@@ -375,29 +414,6 @@ function Example() {
             border: 'none',
             textAlign: 'center'
         },
-        pieChart: {
-            width: '120px',
-            height: '120px',
-            borderRadius: '50%',
-            background: 'conic-gradient(#4CAF50 0deg 130deg, #FF9800 130deg 200deg, #2196F3 200deg 260deg, #00BCD4 260deg 320deg, #9C27B0 320deg 360deg)',
-            margin: '0 auto 20px'
-        },
-        legend: {
-            textAlign: 'left',
-            marginTop: '15px'
-        },
-        legendItem: {
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '8px',
-            fontSize: '12px'
-        },
-        legendColor: {
-            width: '12px',
-            height: '12px',
-            borderRadius: '2px',
-            marginRight: '8px'
-        },
         noticeCard: {
             backgroundColor: '#f8f9fa',
             borderRadius: '15px',
@@ -436,7 +452,7 @@ function Example() {
                     <header style={styles.header}>
                         <div style={styles.headerLeft}>
                             <div style={styles.logoPlaceholder}>
-                                🎓
+                                <Icons.Student size={16} color="white" />
                             </div>
                             <h1 style={styles.pageTitle}>
                                 Castro University - Landing Page
@@ -444,7 +460,7 @@ function Example() {
                         </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
                             <div style={styles.searchContainer}>
-                                <span style={styles.searchIcon}>🔍</span>
+                                <span style={styles.searchIcon}><Icons.Search size={16} color="#666" /></span>
                                 <input
                                     type="text"
                                     placeholder="SEARCH"
@@ -454,12 +470,12 @@ function Example() {
                                 />
                             </div>
                             <div style={{...styles.logoPlaceholder, width: '40px', height: '40px', fontSize: '16px'}}>
-                                🛡️
+                                <Icons.Shield size={16} color="white" />
                             </div>
                             {user ? (
                                 <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-                                    <span style={{fontSize: '14px', color: '#2c5530', fontWeight: '600'}}>
-                                        {user.userType === 'employee' ? '👔' : '🎓'} {user.firstName} {user.lastName}
+                                    <span style={{fontSize: '14px', color: '#2c5530', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px'}}>
+                                        {user.userType === 'employee' ? <Icons.Employee size={16} color="#2c5530" /> : <Icons.Student size={16} color="#2c5530" />} {user.firstName} {user.lastName}
                                     </span>
                                     <button
                                         style={{...styles.loginBtn, backgroundColor: '#f44336'}}
@@ -516,6 +532,23 @@ function Example() {
                                     </div>
                                 </div>
 
+                                {/* Total Faculty */}
+                                <div style={{...styles.totalStudentsCard, backgroundColor: '#FFF3E0', border: '2px solid #FF9800'}}>
+                                    <h3 style={{...styles.totalStudentsTitle, color: '#FF9800'}}>TOTAL FACULTY: {loading ? '...' : dashboardData.totalFaculty}</h3>
+                                    <div style={styles.yearStatsContainer}>
+                                        {loading ? (
+                                            <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                        ) : (
+                                            dashboardData.facultyByDepartment.slice(0, 4).map((dept, index) => (
+                                                <div key={index} style={styles.yearStat}>
+                                                    <div style={styles.yearLabel}>{dept.name}:</div>
+                                                    <div style={{...styles.yearNumber, color: '#FF9800'}}>{dept.faculty}</div>
+                                                </div>
+                                            ))
+                                        )}
+                                    </div>
+                                </div>
+
                                 {/* Department Chart */}
                                 <div style={styles.chartCard}>
                                     <h3 style={styles.chartTitle}>STUDENTS PER DEPARTMENT</h3>
@@ -543,31 +576,65 @@ function Example() {
                                         </div>
                                     )}
                                 </div>
+
+                                {/* Faculty Chart */}
+                                <div style={styles.chartCard}>
+                                    <h3 style={styles.chartTitle}>FACULTY PER DEPARTMENT</h3>
+                                    {loading ? (
+                                        <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                    ) : (
+                                        <div style={styles.chartContainer}>
+                                            {dashboardData.facultyByDepartment.map((dept, index) => {
+                                                const maxFaculty = Math.max(...dashboardData.facultyByDepartment.map(d => d.faculty), 1);
+                                                return (
+                                                    <div key={index} style={styles.chartBar}>
+                                                        <div style={styles.barValue}>{dept.faculty}</div>
+                                                        <div
+                                                            style={{
+                                                                width: '100%',
+                                                                height: `${(dept.faculty / maxFaculty) * 120}px`,
+                                                                backgroundColor: '#FF9800',
+                                                                borderRadius: '4px 4px 0 0'
+                                                            }}
+                                                        ></div>
+                                                        <div style={styles.barLabel}>{dept.name}</div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div style={styles.rightSidebar}>
-                                {/* Pie Chart */}
+                                {/* Students Pie Chart */}
                                 <div style={styles.pieChartCard}>
                                     {loading ? (
                                         <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                     ) : (
-                                        <>
-                                            <div style={styles.pieChart}></div>
-                                            <div style={styles.legend}>
-                                                {dashboardData.studentsByDepartment.map((dept, index) => (
-                                                    <div key={index} style={styles.legendItem}>
-                                                        <div style={{...styles.legendColor, backgroundColor: dept.color}}></div>
-                                                        <span>{dept.name}: {dept.students}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </>
+                                        <PieChart
+                                            data={dashboardData.studentsByDepartment}
+                                            size={120}
+                                            title="Students by Department"
+                                        />
                                     )}
                                 </div>
 
-                                {/* Notice */}
-                                <div style={styles.noticeCard}>
-                                    <div style={styles.placeholderText}>NOTICE</div>
+                                {/* Faculty Pie Chart */}
+                                <div style={styles.pieChartCard}>
+                                    {loading ? (
+                                        <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                                    ) : (
+                                        <PieChart
+                                            data={dashboardData.facultyByDepartment.map(dept => ({
+                                                name: dept.name,
+                                                students: dept.faculty,
+                                                color: '#FF9800'
+                                            }))}
+                                            size={120}
+                                            title="Faculty by Department"
+                                        />
+                                    )}
                                 </div>
 
                                 {/* Forum */}
