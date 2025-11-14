@@ -17,4 +17,8 @@ require('./components/routers');
 require('./components/Home');
 require('./components/Admin');
 require('./components/EmployeeHome');
+require('./components/StudentProfile');
+require('./components/StudentReport');
+require('./components/FacultyReport');
+require('./components/CourseEnrollment');
 

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { Icons } from './SvgIcons';
+import StudentReport from './StudentReport';
+import FacultyReport from './FacultyReport';
 
 function Admin() {
-    // State for current section (students, departments, courses, faculty)
+    // State for current section (students, departments, courses, faculty, reports, faculty_reports)
     const [currentSection, setCurrentSection] = useState('students');
     const [showArchived, setShowArchived] = useState(false);
     const [editId, setEditId] = useState(null);
@@ -17,6 +19,14 @@ function Admin() {
     const [courses, setCourses] = useState([]);
     const [faculty, setFaculty] = useState([]);
     const [archivedData, setArchivedData] = useState([]);
+    const [departmentHeadCandidates, setDepartmentHeadCandidates] = useState([]);
+
+    // Enrollment management states
+    const [selectedStudentForEnrollment, setSelectedStudentForEnrollment] = useState(null);
+    const [studentEnrollments, setStudentEnrollments] = useState([]);
+    const [availableCourses, setAvailableCourses] = useState([]);
+    const [showEnrollmentModal, setShowEnrollmentModal] = useState(false);
+    const [enrollmentLoading, setEnrollmentLoading] = useState(false);
 
     // Form states for Student
     const [studentForm, setStudentForm] = useState({
@@ -31,7 +41,7 @@ function Admin() {
         emergency_contact_name: '',
         emergency_contact_phone: '',
         department_id: '',
-        current_semester: 1,
+        year_level: 1,
         gpa: '',
         enrollment_date: '',
         status: 'active'
@@ -53,7 +63,7 @@ function Admin() {
         code: '',
         description: '',
         credits: 1,
-        semester: '1',
+        year_level: '1',
         department_id: '',
         faculty_id: '',
         max_students: 50,
@@ -82,9 +92,10 @@ function Admin() {
         status: 'active'
     });
 
-    // Load departments on component mount
+    // Load departments and department head candidates on component mount
     useEffect(() => {
         fetchDepartments();
+        fetchDepartmentHeadCandidates();
     }, []);
 
     // Generic fetch function
@@ -108,6 +119,7 @@ function Admin() {
     const fetchDepartments = () => fetchData('/api/departments', setDepartments);
     const fetchCourses = () => fetchData('/api/courses', setCourses);
     const fetchFaculty = () => fetchData('/api/faculty', setFaculty);
+    const fetchDepartmentHeadCandidates = () => fetchData('/api/faculty/department-head-candidates', setDepartmentHeadCandidates);
 
     const fetchArchivedData = async () => {
         const endpoints = {
@@ -118,6 +130,84 @@ function Admin() {
         };
         await fetchData(endpoints[currentSection], setArchivedData);
         setShowArchived(true);
+    };
+
+    // Enrollment management functions
+    const handleManageEnrollments = async (student) => {
+        setSelectedStudentForEnrollment(student);
+        setEnrollmentLoading(true);
+        try {
+            // Fetch student's current enrollments
+            const enrollmentResponse = await fetch(`/api/students/${student.id}/enrollments`);
+            const enrollments = await enrollmentResponse.json();
+            setStudentEnrollments(enrollments);
+
+            // Fetch available courses
+            const coursesResponse = await fetch(`/api/courses/available?student_id=${student.id}&department_id=${student.department_id}&year_level=${student.year_level}`);
+            const courses = await coursesResponse.json();
+            setAvailableCourses(courses);
+
+            setShowEnrollmentModal(true);
+        } catch (error) {
+            console.error('Error fetching enrollment data:', error);
+            alert('Failed to load enrollment data');
+        } finally {
+            setEnrollmentLoading(false);
+        }
+    };
+
+    const handleEnrollInCourse = async (courseId) => {
+        try {
+            const response = await fetch('/api/enrollments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    student_id: selectedStudentForEnrollment.id,
+                    course_id: courseId,
+                    semester: 'Fall',
+                    academic_year: 2025,
+                    section: 'A'
+                }),
+            });
+
+            if (response.ok) {
+                alert('Student successfully enrolled in course!');
+                // Refresh the enrollment data
+                handleManageEnrollments(selectedStudentForEnrollment);
+            } else {
+                const errorData = await response.json();
+                alert(`Failed to enroll student: ${errorData.message || 'Unknown error'}`);
+            }
+        } catch (error) {
+            console.error('Error enrolling student:', error);
+            alert('An error occurred while enrolling the student.');
+        }
+    };
+
+    const handleUnenrollFromCourse = async (enrollmentId) => {
+        if (!confirm('Are you sure you want to unenroll this student from the course?')) return;
+
+        try {
+            const response = await fetch(`/api/enrollments/${enrollmentId}/unenroll`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                alert('Student successfully unenrolled from course!');
+                // Refresh the enrollment data
+                handleManageEnrollments(selectedStudentForEnrollment);
+            } else {
+                alert('Failed to unenroll student.');
+            }
+        } catch (error) {
+            console.error('Error unenrolling student:', error);
+            alert('An error occurred while unenrolling the student.');
+        }
     };
 
     // Submit handlers
@@ -142,7 +232,7 @@ function Admin() {
             students: () => setStudentForm({
                 student_id: '', first_name: '', last_name: '', email: '', phone: '',
                 date_of_birth: '', gender: 'male', address: '', emergency_contact_name: '',
-                emergency_contact_phone: '', department_id: '', current_semester: 1,
+                emergency_contact_phone: '', department_id: '', year_level: 1,
                 gpa: '', enrollment_date: '', status: 'active'
             }),
             departments: () => setDepartmentForm({
@@ -150,7 +240,7 @@ function Admin() {
                 contact_email: '', contact_phone: ''
             }),
             courses: () => setCourseForm({
-                name: '', code: '', description: '', credits: 1, semester: '1',
+                name: '', code: '', description: '', credits: 1, year_level: '1',
                 department_id: '', faculty_id: '', max_students: 50, status: 'active'
             }),
             faculty: () => setFacultyForm({
@@ -177,7 +267,7 @@ function Admin() {
                 method,
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
                 },
                 body: JSON.stringify(forms[currentSection]),
             });
@@ -214,7 +304,7 @@ function Admin() {
                 emergency_contact_name: item.emergency_contact_name || '',
                 emergency_contact_phone: item.emergency_contact_phone || '',
                 department_id: item.department_id || '',
-                current_semester: item.current_semester || 1,
+                year_level: item.year_level || 1,
                 gpa: item.gpa || '',
                 enrollment_date: item.enrollment_date || '',
                 status: item.status || 'active'
@@ -234,7 +324,7 @@ function Admin() {
                 code: item.code || '',
                 description: item.description || '',
                 credits: item.credits || 1,
-                semester: item.semester || '1',
+                year_level: item.year_level || '1',
                 department_id: item.department_id || '',
                 faculty_id: item.faculty_id || '',
                 max_students: item.max_students || 50,
@@ -287,7 +377,7 @@ function Admin() {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
                 },
             });
 
@@ -315,6 +405,7 @@ function Admin() {
         else if (section === 'departments') fetchDepartments();
         else if (section === 'courses') fetchCourses();
         else if (section === 'faculty') fetchFaculty();
+        // Note: reports and faculty_reports sections don't need initial data fetch as they use Report components
     };
 
     const handleBackToHome = () => {
@@ -325,7 +416,7 @@ function Admin() {
             userType: urlParams.get('userType') || 'employee',
             email: urlParams.get('email') || 'user@example.com'
         });
-        window.location.href = `/home?${userParams.toString()}`;
+        window.location.href = `/employee-home?${userParams.toString()}`;
     };
 
     // Get current data and form based on section
@@ -466,15 +557,15 @@ function Admin() {
                             </select>
                         </div>
                         <div className="col-md-4 mb-3">
-                            <label className="form-label">Current Semester</label>
+                            <label className="form-label">Year Level</label>
                             <select
                                 className="form-control"
-                                value={form.current_semester}
-                                onChange={(e) => handleFormChange('current_semester', parseInt(e.target.value))}
+                                value={form.year_level}
+                                onChange={(e) => handleFormChange('year_level', parseInt(e.target.value))}
                                 required
                             >
-                                {[1,2,3,4,5,6,7,8].map(sem => (
-                                    <option key={sem} value={sem}>Semester {sem}</option>
+                                {[1,2,3,4].map(sem => (
+                                    <option key={sem} value={sem}>Year {sem}</option>
                                 ))}
                             </select>
                         </div>
@@ -585,12 +676,18 @@ function Admin() {
                     <div className="row">
                         <div className="col-md-4 mb-3">
                             <label className="form-label">Head of Department</label>
-                            <input
-                                type="text"
-                                className="form-control"
+                            <select
+                                className="form-select"
                                 value={form.head_of_department}
                                 onChange={(e) => handleFormChange('head_of_department', e.target.value)}
-                            />
+                            >
+                                <option value="">Select Department Head</option>
+                                {departmentHeadCandidates.map(candidate => (
+                                    <option key={candidate.id} value={candidate.full_name}>
+                                        {candidate.display_name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="col-md-4 mb-3">
                             <label className="form-label">Contact Email</label>
@@ -661,15 +758,15 @@ function Admin() {
                             />
                         </div>
                         <div className="col-md-3 mb-3">
-                            <label className="form-label">Semester</label>
+                            <label className="form-label">Year Level</label>
                             <select
                                 className="form-control"
-                                value={form.semester}
-                                onChange={(e) => handleFormChange('semester', e.target.value)}
+                                value={form.year_level}
+                                onChange={(e) => handleFormChange('year_level', e.target.value)}
                                 required
                             >
-                                {[1,2,3,4,5,6,7,8].map(sem => (
-                                    <option key={sem} value={sem}>Semester {sem}</option>
+                                {[1,2,3,4].map(sem => (
+                                    <option key={sem} value={sem}>Year {sem}</option>
                                 ))}
                             </select>
                         </div>
@@ -972,7 +1069,7 @@ function Admin() {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Department</th>
-                            <th>Semester</th>
+                            <th>Year Level</th>
                             <th>GPA</th>
                             <th>Status</th>
                             {showArchived && <th>Archived At</th>}
@@ -986,7 +1083,7 @@ function Admin() {
                                 <td>{student.first_name} {student.last_name}</td>
                                 <td>{student.email}</td>
                                 <td>{student.department?.name || 'N/A'}</td>
-                                <td>{student.current_semester}</td>
+                                <td>{student.year_level}</td>
                                 <td>{student.gpa || 'N/A'}</td>
                                 <td>
                                     <span className={`badge ${
@@ -1008,6 +1105,14 @@ function Admin() {
                                             onClick={() => handleEdit(student)}
                                         >
                                             Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-sm me-2"
+                                            style={{backgroundColor: '#2196F3', color: 'white', border: 'none'}}
+                                            onClick={() => handleManageEnrollments(student)}
+                                            title="Manage Courses"
+                                        >
+                                            Courses
                                         </button>
                                         <button
                                             className="btn btn-sm"
@@ -1082,7 +1187,7 @@ function Admin() {
                             <th>Name</th>
                             <th>Department</th>
                             <th>Credits</th>
-                            <th>Semester</th>
+                            <th>Year Level</th>
                             <th>Instructor</th>
                             <th>Max Students</th>
                             <th>Status</th>
@@ -1097,7 +1202,7 @@ function Admin() {
                                 <td>{course.name}</td>
                                 <td>{course.department?.name || 'N/A'}</td>
                                 <td>{course.credits}</td>
-                                <td>{course.semester}</td>
+                                <td>{course.year_level}</td>
                                 <td>
                                     {course.faculty
                                         ? `${course.faculty.first_name} ${course.faculty.last_name}`
@@ -1206,7 +1311,7 @@ function Admin() {
         <>
             <nav className="navbar navbar-expand-lg navbar-dark fixed-top" style={{backgroundColor: '#2c5530'}}>
                 <div className="container-fluid">
-                    <a className="navbar-brand ms-3" href="#" style={{color: 'white'}}>Castro University - Profile Management System</a>
+                    <a className="navbar-brand ms-3" href="#" style={{color: 'white'}}>JX University - Profile Management System</a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -1302,75 +1407,132 @@ function Admin() {
                                     <Icons.Faculty size={20} color={currentSection === 'faculty' ? 'white' : '#2c5530'} className="me-2" />
                                     Faculty & Staff
                                 </button>
+                                <button
+                                    className={`list-group-item list-group-item-action d-flex align-items-center ${currentSection === 'reports' ? '' : ''}`}
+                                    onClick={() => handleSectionChange('reports')}
+                                    style={{
+                                        backgroundColor: currentSection === 'reports' ? '#4CAF50' : 'transparent',
+                                        color: currentSection === 'reports' ? 'white' : '#2c5530',
+                                        border: 'none',
+                                        borderLeft: currentSection === 'reports' ? '4px solid #2c5530' : '4px solid transparent'
+                                    }}
+                                >
+                                    <Icons.Profile size={20} color={currentSection === 'reports' ? 'white' : '#2c5530'} className="me-2" />
+                                    Student Reports
+                                </button>
+                                <button
+                                    className={`list-group-item list-group-item-action d-flex align-items-center ${currentSection === 'faculty_reports' ? '' : ''}`}
+                                    onClick={() => handleSectionChange('faculty_reports')}
+                                    style={{
+                                        backgroundColor: currentSection === 'faculty_reports' ? '#4CAF50' : 'transparent',
+                                        color: currentSection === 'faculty_reports' ? 'white' : '#2c5530',
+                                        border: 'none',
+                                        borderLeft: currentSection === 'faculty_reports' ? '4px solid #2c5530' : '4px solid transparent'
+                                    }}
+                                >
+                                    <Icons.Faculty size={20} color={currentSection === 'faculty_reports' ? 'white' : '#2c5530'} className="me-2" />
+                                    Faculty Reports
+                                </button>
                             </div>
                         </div>
                     </div>
 
                     {/* Main Content */}
                     <div className="col-md-9">
-                        <div className="card shadow">
-                            <div className="card-header bg-light">
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <h4 className="mb-0">
-                                        {editId ? `Edit ${currentSection.slice(0, -1)}` : `Add New ${currentSection.slice(0, -1)}`}
-                                    </h4>
-                                    <div className="badge bg-info text-dark px-3 py-2">
-                                        University Profile Management
+                        {currentSection === 'reports' ? (
+                            <div className="card shadow">
+                                <div className="card-header bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <h4 className="mb-0">Student Reports</h4>
+                                        <div className="badge bg-info text-dark px-3 py-2">
+                                            University Profile Management
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="card-body">
+                                    <StudentReport />
+                                </div>
                             </div>
-                            <div className="card-body">
-                                <form onSubmit={handleSubmit}>
-                                    {renderFormFields()}
-
-                                    <div className="d-flex gap-2">
-                                        <button type="submit" className="btn" style={{backgroundColor: '#4CAF50', color: 'white', border: 'none'}}>
-                                            {editId ? 'Update' : 'Create'} {currentSection.slice(0, -1)}
-                                        </button>
-                                        {editId && (
-                                            <button
-                                                type="button"
-                                                className="btn btn-secondary"
-                                                onClick={() => {
-                                                    setEditId(null);
-                                                    if (currentSection === 'students') {
-                                                        setStudentForm({
-                                                            student_id: '', first_name: '', last_name: '', email: '', phone: '',
-                                                            date_of_birth: '', gender: 'male', address: '', emergency_contact_name: '',
-                                                            emergency_contact_phone: '', department_id: '', current_semester: 1,
-                                                            gpa: '', enrollment_date: '', status: 'active'
-                                                        });
-                                                    } else if (currentSection === 'departments') {
-                                                        setDepartmentForm({
-                                                            name: '', code: '', description: '', head_of_department: '',
-                                                            contact_email: '', contact_phone: ''
-                                                        });
-                                                    } else if (currentSection === 'courses') {
-                                                        setCourseForm({
-                                                            name: '', code: '', description: '', credits: 1, semester: '1',
-                                                            department_id: '', faculty_id: '', max_students: 50, status: 'active'
-                                                        });
-                                                    } else if (currentSection === 'faculty') {
-                                                        setFacultyForm({
-                                                            employee_id: '', first_name: '', last_name: '', email: '', phone: '',
-                                                            date_of_birth: '', gender: 'male', address: '', emergency_contact_name: '',
-                                                            emergency_contact_phone: '', department_id: '', position: 'instructor',
-                                                            hire_date: '', salary: '', office_location: '', specialization: '',
-                                                            education_level: 'masters', status: 'active'
-                                                        });
-                                                    }
-                                                }}
-                                            >
-                                                Cancel Edit
-                                            </button>
-                                        )}
+                        ) : currentSection === 'faculty_reports' ? (
+                            <div className="card shadow">
+                                <div className="card-header bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <h4 className="mb-0">Faculty Reports</h4>
+                                        <div className="badge bg-success text-white px-3 py-2">
+                                            Faculty Profile Management
+                                        </div>
                                     </div>
-                                </form>
+                                </div>
+                                <div className="card-body">
+                                    <FacultyReport />
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <div className="card shadow">
+                                <div className="card-header bg-light">
+                                    <div className="d-flex justify-content-between align-items-center">
+                                        <h4 className="mb-0">
+                                            {editId ? `Edit ${currentSection.slice(0, -1)}` : `Add New ${currentSection.slice(0, -1)}`}
+                                        </h4>
+                                        <div className="badge bg-info text-dark px-3 py-2">
+                                            University Profile Management
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="card-body">
+                                    <form onSubmit={handleSubmit}>
+                                        {renderFormFields()}
 
-                        {/* Data Table */}
-                        <div className="card shadow mt-4">
+                                        <div className="d-flex gap-2">
+                                            <button type="submit" className="btn" style={{backgroundColor: '#4CAF50', color: 'white', border: 'none'}}>
+                                                {editId ? 'Update' : 'Create'} {currentSection.slice(0, -1)}
+                                            </button>
+                                            {editId && (
+                                                <button
+                                                    type="button"
+                                                    className="btn btn-secondary"
+                                                    onClick={() => {
+                                                        setEditId(null);
+                                                        if (currentSection === 'students') {
+                                                            setStudentForm({
+                                                                student_id: '', first_name: '', last_name: '', email: '', phone: '',
+                                                                date_of_birth: '', gender: 'male', address: '', emergency_contact_name: '',
+                                                                emergency_contact_phone: '', department_id: '', year_level: 1,
+                                                                gpa: '', enrollment_date: '', status: 'active'
+                                                            });
+                                                        } else if (currentSection === 'departments') {
+                                                            setDepartmentForm({
+                                                                name: '', code: '', description: '', head_of_department: '',
+                                                                contact_email: '', contact_phone: ''
+                                                            });
+                                                        } else if (currentSection === 'courses') {
+                                                            setCourseForm({
+                                                                name: '', code: '', description: '', credits: 1, year_level: '1',
+                                                                department_id: '', faculty_id: '', max_students: 50, status: 'active'
+                                                            });
+                                                        } else if (currentSection === 'faculty') {
+                                                            setFacultyForm({
+                                                                employee_id: '', first_name: '', last_name: '', email: '', phone: '',
+                                                                date_of_birth: '', gender: 'male', address: '', emergency_contact_name: '',
+                                                                emergency_contact_phone: '', department_id: '', position: 'instructor',
+                                                                hire_date: '', salary: '', office_location: '', specialization: '',
+                                                                education_level: 'masters', status: 'active'
+                                                            });
+                                                        }
+                                                    }}
+                                                >
+                                                    Cancel Edit
+                                                </button>
+                                            )}
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Data Table - Only show for non-reports sections */}
+                        {currentSection !== 'reports' && currentSection !== 'faculty_reports' && (
+                            <div className="card shadow mt-4">
                             <div className="card-header bg-light">
                                 <div className="d-flex justify-content-between align-items-center">
                                     <h5 className="mb-0">
@@ -1448,9 +1610,123 @@ function Admin() {
                                 </div>
                             </div>
                         </div>
+                        )}
                     </div>
                 </div>
             </main>
+
+            {/* Enrollment Management Modal */}
+            {showEnrollmentModal && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                    <div className="modal-dialog modal-lg">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">
+                                    Manage Courses for {selectedStudentForEnrollment?.first_name} {selectedStudentForEnrollment?.last_name}
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={() => setShowEnrollmentModal(false)}
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                {enrollmentLoading ? (
+                                    <div className="text-center p-4">
+                                        <div className="spinner-border text-primary" role="status">
+                                            <span className="visually-hidden">Loading...</span>
+                                        </div>
+                                        <div className="mt-2">Loading enrollment data...</div>
+                                    </div>
+                                ) : (
+                                    <div className="row">
+                                        {/* Current Enrollments */}
+                                        <div className="col-md-6">
+                                            <h6 className="fw-bold mb-3">Current Enrollments</h6>
+                                            {studentEnrollments.length === 0 ? (
+                                                <div className="alert alert-info">
+                                                    This student is not enrolled in any courses.
+                                                </div>
+                                            ) : (
+                                                <div className="list-group">
+                                                    {studentEnrollments.map(enrollment => (
+                                                        <div key={enrollment.id} className="list-group-item">
+                                                            <div className="d-flex justify-content-between align-items-start">
+                                                                <div>
+                                                                    <h6 className="mb-1">{enrollment.course.name}</h6>
+                                                                    <p className="mb-1">
+                                                                        <small>{enrollment.course.code} • {enrollment.course.credits} Credits</small>
+                                                                    </p>
+                                                                    <small className="text-muted">
+                                                                        {enrollment.semester} {enrollment.academic_year} • Section {enrollment.section}
+                                                                    </small>
+                                                                </div>
+                                                                <button
+                                                                    className="btn btn-sm btn-outline-danger"
+                                                                    onClick={() => handleUnenrollFromCourse(enrollment.id)}
+                                                                >
+                                                                    Drop
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Available Courses */}
+                                        <div className="col-md-6">
+                                            <h6 className="fw-bold mb-3">Available Courses</h6>
+                                            {availableCourses.length === 0 ? (
+                                                <div className="alert alert-warning">
+                                                    No available courses found for this student's department and year level.
+                                                </div>
+                                            ) : (
+                                                <div className="list-group" style={{maxHeight: '400px', overflowY: 'auto'}}>
+                                                    {availableCourses.filter(course => !course.is_enrolled).map(course => (
+                                                        <div key={course.id} className="list-group-item">
+                                                            <div className="d-flex justify-content-between align-items-start">
+                                                                <div>
+                                                                    <h6 className="mb-1">{course.name}</h6>
+                                                                    <p className="mb-1">
+                                                                        <small>{course.code} • {course.credits} Credits</small>
+                                                                    </p>
+                                                                    <small className="text-muted">
+                                                                        {course.department?.name} • Year {course.year_level}
+                                                                    </small>
+                                                                    {course.description && (
+                                                                        <p className="mt-2 mb-1 text-muted small">{course.description}</p>
+                                                                    )}
+                                                                </div>
+                                                                <button
+                                                                    className="btn btn-sm btn-outline-primary"
+                                                                    onClick={() => handleEnrollInCourse(course.id)}
+                                                                    disabled={course.is_full}
+                                                                >
+                                                                    {course.is_full ? 'Full' : 'Enroll'}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={() => setShowEnrollmentModal(false)}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

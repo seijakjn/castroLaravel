@@ -375,7 +375,7 @@ function Login({ onClose, onLoginSuccess, userType = 'student' }) {
                     </div>
                     <h2 style={styles.title}>
                         {isSignup
-                            ? `Join Castro University${userType === 'employee' ? ' Staff' : ''}`
+                            ? `Join JX University${userType === 'employee' ? ' Staff' : ''}`
                             : 'Welcome Back'
                         }
                     </h2>

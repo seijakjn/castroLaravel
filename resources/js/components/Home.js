@@ -11,9 +11,10 @@ function Home() {
         totalStudents: 0,
         totalDepartments: 0,
         totalCourses: 0,
-        totalInstructors: 0,
+        totalFaculty: 0,
         studentsByDepartment: [],
-        studentsBySemester: []
+        facultyByDepartment: [],
+        studentsByYearLevel: []
     });
     const [loading, setLoading] = useState(true);
 
@@ -37,44 +38,69 @@ function Home() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Fetch dashboard data from API
+    // fetch dashboard data from the API, yaaaahaallooooooo 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
                 setLoading(true);
-                const [studentsRes, departmentsRes, coursesRes, instructorsRes] = await Promise.all([
+                const [studentsRes, departmentsRes, coursesRes, facultyRes] = await Promise.all([
                     fetch('/api/students'),
                     fetch('/api/departments'),
                     fetch('/api/courses'),
-                    fetch('/api/instructors')
+                    fetch('/api/faculty')
                 ]);
 
-                const [students, departments, courses, instructors] = await Promise.all([
+                const [students, departments, courses, faculty] = await Promise.all([
                     studentsRes.json(),
                     departmentsRes.json(),
                     coursesRes.json(),
-                    instructorsRes.json()
+                    facultyRes.json()
                 ]);
 
+                // Define consistent color palette for departments
+                const departmentColors = [
+                    '#4CAF50', // Green
+                    '#FF9800', // Orange
+                    '#2196F3', // Blue
+                    '#9C27B0', // Purple
+                    '#F44336', // Red
+                    '#00BCD4', // Cyan
+                    '#FF5722', // Deep Orange
+                    '#795548', // Brown
+                    '#607D8B', // Blue Grey
+                    '#E91E63', // Pink
+                ];
+
                 // Process data for charts
-                const studentsByDepartment = departments.map(dept => ({
+                const studentsByDepartment = departments.map((dept, index) => ({
                     name: dept.code || dept.name,
                     students: students.filter(student => student.department_id === dept.id).length,
-                    color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                    color: departmentColors[index % departmentColors.length]
                 }));
 
-                const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
-                    semester: sem,
-                    count: students.filter(student => student.current_semester === sem).length
+                const facultyByDepartment = departments.map((dept, index) => {
+                    const count = faculty.filter(member => member.department_id === dept.id).length;
+                    console.log(`Department ${dept.code}: ${count} faculty members`);
+                    return {
+                        name: dept.code || dept.name,
+                        students: count, // Keep 'students' property for PieChart compatibility
+                        color: departmentColors[index % departmentColors.length]
+                    };
+                });
+
+                const studentsByYearLevel = [1,2,3,4].map(sem => ({
+                    yearLevel: sem,
+                    count: students.filter(student => student.year_level === sem).length
                 }));
 
                 setDashboardData({
                     totalStudents: students.length,
                     totalDepartments: departments.length,
                     totalCourses: courses.length,
-                    totalInstructors: instructors.length,
+                    totalFaculty: faculty.length,
                     studentsByDepartment,
-                    studentsBySemester
+                    facultyByDepartment,
+                    studentsByYearLevel
                 });
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
@@ -83,22 +109,28 @@ function Home() {
                     totalStudents: 245,
                     totalDepartments: 4,
                     totalCourses: 32,
-                    totalInstructors: 18,
+                    totalFaculty: 18,
                     studentsByDepartment: [
                         { name: 'Computer Science', students: 85, color: '#4CAF50' },
                         { name: 'Mathematics', students: 62, color: '#2196F3' },
                         { name: 'Engineering', students: 73, color: '#FF9800' },
                         { name: 'Business', students: 25, color: '#9C27B0' }
                     ],
-                    studentsBySemester: [
-                        { semester: 1, count: 45 },
-                        { semester: 2, count: 38 },
-                        { semester: 3, count: 42 },
-                        { semester: 4, count: 35 },
-                        { semester: 5, count: 28 },
-                        { semester: 6, count: 22 },
-                        { semester: 7, count: 20 },
-                        { semester: 8, count: 15 }
+                    facultyByDepartment: [
+                        { name: 'Computer Science', students: 5, color: '#4CAF50' },
+                        { name: 'Mathematics', students: 4, color: '#2196F3' },
+                        { name: 'Engineering', students: 6, color: '#FF9800' },
+                        { name: 'Business', students: 3, color: '#9C27B0' }
+                    ],
+                    studentsByYearLevel: [
+                        { yearLevel: 1, count: 45 },
+                        { yearLevel: 2, count: 38 },
+                        { yearLevel: 3, count: 42 },
+                        { yearLevel: 4, count: 35 },
+                        { yearLevel: 5, count: 28 },
+                        { yearLevel: 6, count: 22 },
+                        { yearLevel: 7, count: 20 },
+                        { yearLevel: 8, count: 15 }
                     ]
                 });
             } finally {
@@ -378,30 +410,14 @@ function Home() {
                     <div style={styles.logoPlaceholder}>
                         <Icons.Student size={24} color="white" />
                     </div>
-                    <p style={styles.logoText}>Castro University</p>
+                    <p style={styles.logoText}>JX University</p>
                 </div>
                 <nav style={styles.nav}>
                     <a href="#" style={{...styles.navItem, ...styles.navItemActive}}>
                         <span style={styles.navIcon}><Icons.Home size={18} color="currentColor" /></span>
                         HOME
                     </a>
-                    <a href="#" style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Calendar size={18} color="currentColor" /></span>
-                        EVENTS
-                    </a>
-                    <a href="#" style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Archive size={18} color="currentColor" /></span>
-                        ARCHIVE
-                    </a>
-                    <a href="#" style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Settings size={18} color="currentColor" /></span>
-                        ADMIN
-                    </a>
-                    <a href="#" style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Forum size={18} color="currentColor" /></span>
-                        FORUM
-                    </a>
-                    <a href="#" style={styles.navItem}>
+                    <a href="/student-profile" style={styles.navItem}>
                         <span style={styles.navIcon}><Icons.Profile size={18} color="currentColor" /></span>
                         PROFILE
                     </a>
@@ -426,7 +442,7 @@ function Home() {
                             <Icons.Student size={16} color="white" />
                         </div>
                         <h1 style={styles.pageTitle}>
-                            Castro University - Dashboard
+                            JX University - Dashboard
                         </h1>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
@@ -482,26 +498,26 @@ function Home() {
                             <div style={{fontSize: '32px', fontWeight: '700', color: '#FF9800'}}>{loading ? '...' : dashboardData.totalCourses}</div>
                         </div>
                         <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
-                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Instructors</div>
-                            <div style={{fontSize: '32px', fontWeight: '700', color: '#9C27B0'}}>{loading ? '...' : dashboardData.totalInstructors}</div>
+                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Faculty</div>
+                            <div style={{fontSize: '32px', fontWeight: '700', color: '#9C27B0'}}>{loading ? '...' : dashboardData.totalFaculty}</div>
                         </div>
                     </div>
 
                     {/* Charts Grid */}
                     <div style={styles.statsGrid}>
                         <div style={{display: 'grid', gridTemplateRows: 'auto 1fr', gap: '20px'}}>
-                            {/* Students by Semester */}
+                            {/* Students by Year Level */}
                             <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', boxSizing: 'border-box'}}>
                                 <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '15px'}}>
-                                    Students by Semester
+                                    Students by Year Level
                                 </h3>
                                 {loading ? (
                                     <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                 ) : (
                                     <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: isMobile ? '10px' : '15px', marginTop: '20px'}}>
-                                        {dashboardData.studentsBySemester.slice(0, 8).map((sem, index) => (
+                                        {dashboardData.studentsByYearLevel.slice(0, 8).map((sem, index) => (
                                             <div key={index} style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                                <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>Semester {sem.semester}:</div>
+                                                <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>Year {sem.yearLevel}:</div>
                                                 <div style={{fontSize: '24px', fontWeight: '700', color: '#2c5530'}}>{sem.count}</div>
                                             </div>
                                         ))}
@@ -524,17 +540,147 @@ function Home() {
                                 )}
                             </div>
 
-                            {/* Quick Actions Card */}
-                            <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', textAlign: 'center'}}>
-                                <h4 style={{color: '#2c5530', marginBottom: '15px'}}>Quick Actions</h4>
-                                <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-                                    <button style={{padding: '10px', backgroundColor: user.userType === 'employee' ? '#FF9800' : '#4CAF50', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', cursor: 'pointer'}}>
-                                        {user.userType === 'employee' ? 'Manage Students' : 'View Grades'}
-                                    </button>
-                                    <button style={{padding: '10px', backgroundColor: '#2196F3', color: 'white', border: 'none', borderRadius: '8px', fontSize: '14px', cursor: 'pointer'}}>
-                                        {user.userType === 'employee' ? 'Generate Reports' : 'Course Schedule'}
-                                    </button>
-                                </div>
+                            {/* Faculty by Department */}
+                            <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none'}}>
+                                {loading ? (
+                                    <div style={{textAlign: 'center', padding: '20px', color: '#666'}}>Loading...</div>
+                                ) : (
+                                    <PieChart
+                                        data={dashboardData.facultyByDepartment}
+                                        size={160}
+                                        title="Faculty by Department"
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Faculty Charts */}
+                    <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', marginBottom: '30px', border: '1px solid #e0e0e0'}}>
+                        <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '20px', textAlign: 'center'}}>
+                            Faculty per Department
+                        </h3>
+                        {loading ? (
+                            <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                        ) : (
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'end', gap: '15px', height: '200px', padding: '20px'}}>
+                                {dashboardData.facultyByDepartment.map((dept, index) => (
+                                    <div key={index} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
+                                        <div style={{
+                                            backgroundColor: dept.color,
+                                            width: '60px',
+                                            height: `${Math.max(dept.students * 40, 30)}px`,
+                                            borderRadius: '4px 4px 0 0',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: 'white',
+                                            fontWeight: '600',
+                                            fontSize: '14px'
+                                        }}>
+                                            {dept.students}
+                                        </div>
+                                        <div style={{fontSize: '12px', color: '#666', fontWeight: '600', textAlign: 'center'}}>
+                                            {dept.name}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Students per Department Bar Chart */}
+                    <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', marginBottom: '30px'}}>
+                        <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '20px', textAlign: 'center'}}>
+                            Students per Department
+                        </h3>
+                        {loading ? (
+                            <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
+                        ) : (
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'end', gap: '15px', height: '200px', padding: '20px'}}>
+                                {dashboardData.studentsByDepartment.map((dept, index) => (
+                                    <div key={index} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
+                                        <div style={{
+                                            backgroundColor: dept.color,
+                                            width: '60px',
+                                            height: `${Math.max(dept.students * 10, 20)}px`,
+                                            borderRadius: '4px 4px 0 0',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: 'white',
+                                            fontWeight: '600',
+                                            fontSize: '14px'
+                                        }}>
+                                            {dept.students}
+                                        </div>
+                                        <div style={{fontSize: '12px', color: '#666', fontWeight: '600', textAlign: 'center'}}>
+                                            {dept.name}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Course Enrollment Section */}
+                    <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', marginBottom: '30px'}}>
+                        <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '20px', textAlign: 'center'}}>
+                            Course Enrollment
+                        </h3>
+                        <div style={{textAlign: 'center', marginBottom: '20px'}}>
+                            <p style={{color: '#666', marginBottom: '15px'}}>
+                                Browse and enroll in courses available for your department and year level
+                            </p>
+                            <button
+                                style={{
+                                    backgroundColor: '#4CAF50',
+                                    color: 'white',
+                                    border: 'none',
+                                    padding: '12px 30px',
+                                    borderRadius: '25px',
+                                    fontSize: '16px',
+                                    fontWeight: '600',
+                                    cursor: 'pointer',
+                                    boxShadow: '0 4px 15px rgba(76, 175, 80, 0.3)',
+                                    transition: 'all 0.3s ease'
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.target.style.backgroundColor = '#45a049';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                    e.target.style.boxShadow = '0 6px 20px rgba(76, 175, 80, 0.4)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.target.style.backgroundColor = '#4CAF50';
+                                    e.target.style.transform = 'translateY(0)';
+                                    e.target.style.boxShadow = '0 4px 15px rgba(76, 175, 80, 0.3)';
+                                }}
+                                onClick={() => {
+                                    // Navigate to course enrollment page with student info
+                                    const params = new URLSearchParams({
+                                        firstName: user.firstName,
+                                        lastName: user.lastName,
+                                        userType: user.userType,
+                                        email: user.email
+                                    });
+                                    window.location.href = `/course-enrollment?${params.toString()}`;
+                                }}
+                            >
+                                📚 Browse Available Courses
+                            </button>
+                        </div>
+                        <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '15px', marginTop: '20px'}}>
+                            <div style={{backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '10px', textAlign: 'center'}}>
+                                <div style={{fontSize: '14px', color: '#666', marginBottom: '5px'}}>Your Department</div>
+                                <div style={{fontSize: '16px', fontWeight: '600', color: '#2c5530'}}>Computer Science</div>
+                            </div>
+                            <div style={{backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '10px', textAlign: 'center'}}>
+                                <div style={{fontSize: '14px', color: '#666', marginBottom: '5px'}}>Your Year Level</div>
+                                <div style={{fontSize: '16px', fontWeight: '600', color: '#2c5530'}}>Year 2</div>
+                            </div>
+                            <div style={{backgroundColor: '#f8f9fa', padding: '15px', borderRadius: '10px', textAlign: 'center'}}>
+                                <div style={{fontSize: '14px', color: '#666', marginBottom: '5px'}}>Enrolled Courses</div>
+                                <div style={{fontSize: '16px', fontWeight: '600', color: '#2c5530'}}>3</div>
                             </div>
                         </div>
                     </div>

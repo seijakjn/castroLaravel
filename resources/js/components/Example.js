@@ -16,7 +16,7 @@ function Example() {
         totalInstructors: 0,
         totalFaculty: 0,
         studentsByDepartment: [],
-        studentsBySemester: [],
+        studentsByYearLevel: [],
         facultyByDepartment: []
     });
     const [loading, setLoading] = useState(true);
@@ -51,22 +51,36 @@ function Example() {
                     facultyRes.json()
                 ]);
 
+                // Define consistent color palette for departments
+                const departmentColors = [
+                    '#4CAF50', // Green
+                    '#FF9800', // Orange
+                    '#2196F3', // Blue
+                    '#9C27B0', // Purple
+                    '#F44336', // Red
+                    '#00BCD4', // Cyan
+                    '#FF5722', // Deep Orange
+                    '#795548', // Brown
+                    '#607D8B', // Blue Grey
+                    '#E91E63', // Pink
+                ];
+
                 // Process data for charts
-                const studentsByDepartment = departments.map(dept => ({
+                const studentsByDepartment = departments.map((dept, index) => ({
                     name: dept.code || dept.name,
                     students: students.filter(student => student.department_id === dept.id).length,
-                    color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                    color: departmentColors[index % departmentColors.length]
                 }));
 
-                const facultyByDepartment = departments.map(dept => ({
+                const facultyByDepartment = departments.map((dept, index) => ({
                     name: dept.code || dept.name,
-                    faculty: faculty.filter(fac => fac.department_id === dept.id).length,
-                    color: `hsl(${Math.random() * 360}, 70%, 60%)`
+                    students: faculty.filter(fac => fac.department_id === dept.id).length,
+                    color: departmentColors[index % departmentColors.length]
                 }));
 
-                const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
-                    semester: sem,
-                    count: students.filter(student => student.current_semester === sem).length
+                const studentsByYearLevel = [1,2,3,4].map(year => ({
+                    yearLevel: year,
+                    count: students.filter(student => student.year_level === year).length
                 }));
 
                 setDashboardData({
@@ -76,7 +90,7 @@ function Example() {
                     totalInstructors: instructors.length,
                     totalFaculty: faculty.length,
                     studentsByDepartment,
-                    studentsBySemester,
+                    studentsByYearLevel,
                     facultyByDepartment
                 });
             } catch (error) {
@@ -95,20 +109,16 @@ function Example() {
                         { name: 'Business', students: 25, color: '#9C27B0' }
                     ],
                     facultyByDepartment: [
-                        { name: 'Computer Science', faculty: 5, color: '#4CAF50' },
-                        { name: 'Mathematics', faculty: 4, color: '#2196F3' },
-                        { name: 'Engineering', faculty: 4, color: '#FF9800' },
-                        { name: 'Business', faculty: 2, color: '#9C27B0' }
+                        { name: 'Computer Science', students: 5, color: '#4CAF50' },
+                        { name: 'Mathematics', students: 4, color: '#2196F3' },
+                        { name: 'Engineering', students: 4, color: '#FF9800' },
+                        { name: 'Business', students: 2, color: '#9C27B0' }
                     ],
-                    studentsBySemester: [
-                        { semester: 1, count: 45 },
-                        { semester: 2, count: 38 },
-                        { semester: 3, count: 42 },
-                        { semester: 4, count: 35 },
-                        { semester: 5, count: 28 },
-                        { semester: 6, count: 22 },
-                        { semester: 7, count: 20 },
-                        { semester: 8, count: 15 }
+                    studentsByYearLevel: [
+                        { yearLevel: 1, count: 95 },
+                        { yearLevel: 2, count: 80 },
+                        { yearLevel: 3, count: 70 },
+                        { yearLevel: 4, count: 60 }
                     ]
                 });
             } finally {
@@ -455,7 +465,7 @@ function Example() {
                                 <Icons.Student size={16} color="white" />
                             </div>
                             <h1 style={styles.pageTitle}>
-                                Castro University - Landing Page
+                                JX University - Landing Page
                             </h1>
                         </div>
                         <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
@@ -498,6 +508,12 @@ function Example() {
                                     >
                                         Employee Login
                                     </button>
+                                    <button
+                                        style={{...styles.loginBtn, backgroundColor: '#9C27B0', boxShadow: '0 2px 10px rgba(156, 39, 176, 0.3)'}}
+                                        onClick={() => window.location.href = '/admin'}
+                                    >
+                                        Admin Panel
+                                    </button>
                                 </div>
                             )}
                         </div>
@@ -522,32 +538,16 @@ function Example() {
                                         {loading ? (
                                             <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                         ) : (
-                                            dashboardData.studentsBySemester.slice(0, 4).map((sem, index) => (
+                                            dashboardData.studentsByYearLevel.map((year, index) => (
                                                 <div key={index} style={styles.yearStat}>
-                                                    <div style={styles.yearLabel}>{sem.semester === 1 ? '1st' : sem.semester === 2 ? '2nd' : sem.semester === 3 ? '3rd' : sem.semester + 'th'} Year:</div>
-                                                    <div style={styles.yearNumber}>{sem.count}</div>
+                                                    <div style={styles.yearLabel}>{year.yearLevel === 1 ? '1st' : year.yearLevel === 2 ? '2nd' : year.yearLevel === 3 ? '3rd' : year.yearLevel + 'th'} Year:</div>
+                                                    <div style={styles.yearNumber}>{year.count}</div>
                                                 </div>
                                             ))
                                         )}
                                     </div>
                                 </div>
 
-                                {/* Total Faculty */}
-                                <div style={{...styles.totalStudentsCard, backgroundColor: '#FFF3E0', border: '2px solid #FF9800'}}>
-                                    <h3 style={{...styles.totalStudentsTitle, color: '#FF9800'}}>TOTAL FACULTY: {loading ? '...' : dashboardData.totalFaculty}</h3>
-                                    <div style={styles.yearStatsContainer}>
-                                        {loading ? (
-                                            <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
-                                        ) : (
-                                            dashboardData.facultyByDepartment.slice(0, 4).map((dept, index) => (
-                                                <div key={index} style={styles.yearStat}>
-                                                    <div style={styles.yearLabel}>{dept.name}:</div>
-                                                    <div style={{...styles.yearNumber, color: '#FF9800'}}>{dept.faculty}</div>
-                                                </div>
-                                            ))
-                                        )}
-                                    </div>
-                                </div>
 
                                 {/* Department Chart */}
                                 <div style={styles.chartCard}>
@@ -585,15 +585,15 @@ function Example() {
                                     ) : (
                                         <div style={styles.chartContainer}>
                                             {dashboardData.facultyByDepartment.map((dept, index) => {
-                                                const maxFaculty = Math.max(...dashboardData.facultyByDepartment.map(d => d.faculty), 1);
+                                                const maxFaculty = Math.max(...dashboardData.facultyByDepartment.map(d => d.students), 1);
                                                 return (
                                                     <div key={index} style={styles.chartBar}>
-                                                        <div style={styles.barValue}>{dept.faculty}</div>
+                                                        <div style={styles.barValue}>{dept.students}</div>
                                                         <div
                                                             style={{
                                                                 width: '100%',
-                                                                height: `${(dept.faculty / maxFaculty) * 120}px`,
-                                                                backgroundColor: '#FF9800',
+                                                                height: `${Math.max((dept.students / maxFaculty) * 150, 10)}px`,
+                                                                backgroundColor: dept.color,
                                                                 borderRadius: '4px 4px 0 0'
                                                             }}
                                                         ></div>
@@ -626,21 +626,13 @@ function Example() {
                                         <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                     ) : (
                                         <PieChart
-                                            data={dashboardData.facultyByDepartment.map(dept => ({
-                                                name: dept.name,
-                                                students: dept.faculty,
-                                                color: '#FF9800'
-                                            }))}
+                                            data={dashboardData.facultyByDepartment}
                                             size={120}
                                             title="Faculty by Department"
                                         />
                                     )}
                                 </div>
 
-                                {/* Forum */}
-                                <div style={styles.forumCard}>
-                                    <div style={styles.placeholderText}>FORUM</div>
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -4,16 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>JX University - Admin Panel</title>
-
+        <title>Student Profile - JX University</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Styles -->
+        <style>
+            body {
+                font-family: 'Nunito', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f8f9fa;
+            }
+        </style>
     </head>
     <body>
-        <div id="admin"></div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ mix('/js/app.js') }}"></script>
+        <div id="student-profile"></div>
+        <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

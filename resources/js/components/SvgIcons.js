@@ -101,6 +101,13 @@ export const Icons = {
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16 4C16.55 4 17 4.45 17 5S16.55 6 16 6 15 5.55 15 5 15.45 4 16 4ZM13 15L15.5 9.5C15.5 9.5 14.5 8 12.5 8S9.5 9.5 9.5 9.5L12 15H13ZM12 6C13.1 6 14 5.1 14 4S13.1 2 12 2 10 2.9 10 4 10.9 6 12 6ZM21 15.5C21 16.88 19.88 18 18.5 18C17.12 18 16 16.88 16 15.5C16 14.12 17.12 13 18.5 13C19.88 13 21 14.12 21 15.5ZM8 4C8.55 4 9 4.45 9 5S8.55 6 8 6 7 5.55 7 5 7.45 4 8 4ZM7.5 22H9L11 13H9.5L7.5 22ZM8 15.5C8 16.88 6.88 18 5.5 18C4.12 18 3 16.88 3 15.5C3 14.12 4.12 13 5.5 13C6.88 13 8 14.12 8 15.5ZM15 22H16.5L14.5 13H13L15 22Z" fill={color}/>
     </svg>
+  ),
+
+  // Download icon (for export functionality)
+  Download: ({ size = 20, color = "currentColor" }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5 20H19V18H5V20ZM19 9H15V3H9V9H5L12 16L19 9Z" fill={color}/>
+    </svg>
   )
 };
 

@@ -15,7 +15,7 @@ function EmployeeHome() {
         totalFaculty: 0,
         studentsByDepartment: [],
         facultyByDepartment: [],
-        studentsBySemester: []
+        studentsByYearLevel: []
     });
     const [loading, setLoading] = useState(true);
 
@@ -60,22 +60,36 @@ function EmployeeHome() {
                     facultyRes.json()
                 ]);
 
+                // Define consistent color palette for departments
+                const departmentColors = [
+                    '#4CAF50', // Green
+                    '#FF9800', // Orange
+                    '#2196F3', // Blue
+                    '#9C27B0', // Purple
+                    '#F44336', // Red
+                    '#00BCD4', // Cyan
+                    '#FF5722', // Deep Orange
+                    '#795548', // Brown
+                    '#607D8B', // Blue Grey
+                    '#E91E63', // Pink
+                ];
+
                 // Process data for charts
-                const studentsByDepartment = departments.map(dept => ({
+                const studentsByDepartment = departments.map((dept, index) => ({
                     name: dept.code || dept.name,
                     students: students.filter(student => student.department_id === dept.id).length,
-                    color: `hsl(${Math.random() * 360}, 70%, 50%)`
+                    color: departmentColors[index % departmentColors.length]
                 }));
 
-                const facultyByDepartment = departments.map(dept => ({
+                const facultyByDepartment = departments.map((dept, index) => ({
                     name: dept.code || dept.name,
                     faculty: faculty.filter(fac => fac.department_id === dept.id).length,
-                    color: `hsl(${Math.random() * 360}, 70%, 60%)`
+                    color: departmentColors[index % departmentColors.length]
                 }));
 
-                const studentsBySemester = [1,2,3,4,5,6,7,8].map(sem => ({
-                    semester: sem,
-                    count: students.filter(student => student.current_semester === sem).length
+                const studentsByYearLevel = [1,2,3,4].map(sem => ({
+                    yearLevel: sem,
+                    count: students.filter(student => student.year_level === sem).length
                 }));
 
                 setDashboardData({
@@ -86,7 +100,7 @@ function EmployeeHome() {
                     totalFaculty: faculty.length,
                     studentsByDepartment,
                     facultyByDepartment,
-                    studentsBySemester
+                    studentsByYearLevel
                 });
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
@@ -104,20 +118,16 @@ function EmployeeHome() {
                         { name: 'Business', students: 25, color: '#9C27B0' }
                     ],
                     facultyByDepartment: [
-                        { name: 'Computer Science', faculty: 5, color: '#4CAF50' },
-                        { name: 'Mathematics', faculty: 4, color: '#2196F3' },
-                        { name: 'Engineering', faculty: 4, color: '#FF9800' },
-                        { name: 'Business', faculty: 2, color: '#9C27B0' }
+                        { name: 'CS', faculty: 5, color: '#4CAF50' },
+                        { name: 'MATH', faculty: 4, color: '#2196F3' },
+                        { name: 'ENG', faculty: 4, color: '#FF9800' },
+                        { name: 'BUS', faculty: 2, color: '#9C27B0' }
                     ],
-                    studentsBySemester: [
-                        { semester: 1, count: 45 },
-                        { semester: 2, count: 38 },
-                        { semester: 3, count: 42 },
-                        { semester: 4, count: 35 },
-                        { semester: 5, count: 28 },
-                        { semester: 6, count: 22 },
-                        { semester: 7, count: 20 },
-                        { semester: 8, count: 15 }
+                    studentsByYearLevel: [
+                        { yearLevel: 1, count: 95 },
+                        { yearLevel: 2, count: 80 },
+                        { yearLevel: 3, count: 70 },
+                        { yearLevel: 4, count: 60 }
                     ]
                 });
             } finally {
@@ -411,7 +421,7 @@ function EmployeeHome() {
                     <div style={styles.logoPlaceholder}>
                         <Icons.Employee size={24} color="white" />
                     </div>
-                    <p style={styles.logoText}>Castro University</p>
+                    <p style={styles.logoText}>JX University</p>
                 </div>
                 <nav style={styles.nav}>
                     <div style={{...styles.navItem, ...styles.navItemActive}}>
@@ -432,18 +442,6 @@ function EmployeeHome() {
                     >
                         <span style={styles.navIcon}><Icons.Settings size={18} color="currentColor" /></span>
                         ADMIN PANEL
-                    </div>
-                    <div style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Calendar size={18} color="currentColor" /></span>
-                        EVENTS
-                    </div>
-                    <div style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Archive size={18} color="currentColor" /></span>
-                        ARCHIVE
-                    </div>
-                    <div style={styles.navItem}>
-                        <span style={styles.navIcon}><Icons.Forum size={18} color="currentColor" /></span>
-                        FORUM
                     </div>
                     <div style={styles.navItem}>
                         <span style={styles.navIcon}><Icons.Profile size={18} color="currentColor" /></span>
@@ -470,7 +468,7 @@ function EmployeeHome() {
                             <Icons.Employee size={16} color="white" />
                         </div>
                         <h1 style={styles.pageTitle}>
-                            Castro University - Staff Dashboard
+                            JX University - Staff Dashboard
                         </h1>
                     </div>
                     <div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
@@ -543,27 +541,23 @@ function EmployeeHome() {
                             <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Courses</div>
                             <div style={{fontSize: '32px', fontWeight: '700', color: '#9C27B0'}}>{loading ? '...' : dashboardData.totalCourses}</div>
                         </div>
-                        <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', textAlign: 'center'}}>
-                            <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>Instructors</div>
-                            <div style={{fontSize: '32px', fontWeight: '700', color: '#795548'}}>{loading ? '...' : dashboardData.totalInstructors}</div>
-                        </div>
                     </div>
 
                     {/* Charts Grid */}
                     <div style={styles.statsGrid}>
                         <div style={{display: 'grid', gridTemplateRows: 'auto auto 1fr', gap: '20px'}}>
-                            {/* Students by Semester */}
+                            {/* Students by Year Level */}
                             <div style={{backgroundColor: 'white', borderRadius: '15px', padding: '25px', boxShadow: '0 4px 20px rgba(0,0,0,0.08)', border: 'none', boxSizing: 'border-box'}}>
                                 <h3 style={{fontSize: '18px', fontWeight: '600', color: '#2c5530', marginBottom: '15px'}}>
-                                    Students by Semester
+                                    Students by Year Level
                                 </h3>
                                 {loading ? (
                                     <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                 ) : (
                                     <div style={{display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(4, 1fr)', gap: isMobile ? '10px' : '15px', marginTop: '20px'}}>
-                                        {dashboardData.studentsBySemester.slice(0, 8).map((sem, index) => (
+                                        {dashboardData.studentsByYearLevel.slice(0, 8).map((sem, index) => (
                                             <div key={index} style={{textAlign: 'center', padding: '15px', backgroundColor: '#f8f9fa', borderRadius: '10px'}}>
-                                                <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>Semester {sem.semester}:</div>
+                                                <div style={{fontSize: '12px', color: '#666', marginBottom: '5px', fontWeight: '500'}}>Year {sem.yearLevel}:</div>
                                                 <div style={{fontSize: '24px', fontWeight: '700', color: '#4CAF50'}}>{sem.count}</div>
                                             </div>
                                         ))}
@@ -577,21 +571,38 @@ function EmployeeHome() {
                                 {loading ? (
                                     <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                 ) : (
-                                    <div style={{display: 'flex', alignItems: 'end', justifyContent: 'space-around', height: '200px', padding: '20px 0'}}>
+                                    <div style={{display: 'flex', alignItems: 'end', justifyContent: 'space-evenly', height: '200px', padding: '20px 10px', gap: '15px'}}>
                                         {dashboardData.studentsByDepartment.map((dept, index) => {
                                             const maxStudents = Math.max(...dashboardData.studentsByDepartment.map(d => d.students), 1);
                                             return (
-                                                <div key={index} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
+                                                <div key={index} style={{
+                                                    minWidth: '60px',
+                                                    maxWidth: '80px',
+                                                    flex: 1,
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'center',
+                                                    gap: '8px'
+                                                }}>
                                                     <div style={{fontSize: '11px', color: '#666', fontWeight: '500'}}>{dept.students}</div>
                                                     <div
                                                         style={{
                                                             width: '40px',
-                                                            height: `${(dept.students / maxStudents) * 150}px`,
-                                                            backgroundColor: '#4CAF50',
-                                                            borderRadius: '4px 4px 0 0'
+                                                            height: `${(dept.students / maxStudents) * 140}px`,
+                                                            backgroundColor: dept.color || '#4CAF50',
+                                                            borderRadius: '4px 4px 0 0',
+                                                            margin: '0 auto'
                                                         }}
                                                     ></div>
-                                                    <div style={{fontSize: '12px', fontWeight: '600', color: '#2c5530', marginTop: '10px'}}>{dept.name}</div>
+                                                    <div style={{
+                                                        fontSize: '11px',
+                                                        fontWeight: '600',
+                                                        color: '#2c5530',
+                                                        marginTop: '8px',
+                                                        textAlign: 'center',
+                                                        lineHeight: '1.2',
+                                                        wordWrap: 'break-word'
+                                                    }}>{dept.name}</div>
                                                 </div>
                                             );
                                         })}
@@ -605,21 +616,38 @@ function EmployeeHome() {
                                 {loading ? (
                                     <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                 ) : (
-                                    <div style={{display: 'flex', alignItems: 'end', justifyContent: 'space-around', height: '150px', padding: '20px 0'}}>
+                                    <div style={{display: 'flex', alignItems: 'end', justifyContent: 'space-evenly', height: '150px', padding: '20px 10px', gap: '15px'}}>
                                         {dashboardData.facultyByDepartment.map((dept, index) => {
                                             const maxFaculty = Math.max(...dashboardData.facultyByDepartment.map(d => d.faculty), 1);
                                             return (
-                                                <div key={index} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px'}}>
+                                                <div key={index} style={{
+                                                    minWidth: '60px',
+                                                    maxWidth: '80px',
+                                                    flex: 1,
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    alignItems: 'center',
+                                                    gap: '8px'
+                                                }}>
                                                     <div style={{fontSize: '11px', color: '#666', fontWeight: '500'}}>{dept.faculty}</div>
                                                     <div
                                                         style={{
                                                             width: '40px',
-                                                            height: `${(dept.faculty / maxFaculty) * 120}px`,
+                                                            height: `${(dept.faculty / maxFaculty) * 100}px`,
                                                             backgroundColor: '#FF9800',
-                                                            borderRadius: '4px 4px 0 0'
+                                                            borderRadius: '4px 4px 0 0',
+                                                            margin: '0 auto'
                                                         }}
                                                     ></div>
-                                                    <div style={{fontSize: '12px', fontWeight: '600', color: '#FF9800', marginTop: '10px'}}>{dept.name}</div>
+                                                    <div style={{
+                                                        fontSize: '11px',
+                                                        fontWeight: '600',
+                                                        color: '#2c5530',
+                                                        marginTop: '8px',
+                                                        textAlign: 'center',
+                                                        lineHeight: '1.2',
+                                                        wordWrap: 'break-word'
+                                                    }}>{dept.name}</div>
                                                 </div>
                                             );
                                         })}
@@ -648,10 +676,10 @@ function EmployeeHome() {
                                     <div style={{textAlign: 'center', padding: '40px', color: '#666'}}>Loading...</div>
                                 ) : (
                                     <PieChart
-                                        data={dashboardData.facultyByDepartment.map(dept => ({
+                                        data={dashboardData.facultyByDepartment.map((dept, index) => ({
                                             name: dept.name,
                                             students: dept.faculty,
-                                            color: '#FF9800'
+                                            color: dept.color || `hsl(${(index * 60) % 360}, 70%, 50%)`
                                         }))}
                                         size={160}
                                         title="Faculty Distribution"

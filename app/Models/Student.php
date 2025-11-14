@@ -22,7 +22,7 @@ class Student extends Model
         'emergency_contact_name',
         'emergency_contact_phone',
         'department_id',
-        'current_semester',
+        'year_level',
         'gpa',
         'enrollment_date',
         'status'
@@ -42,5 +42,42 @@ class Student extends Model
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;
+    }
+
+    // Enrollment relationships
+    public function enrollments()
+    {
+        return $this->hasMany(Enrollment::class);
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')
+                    ->withPivot('semester', 'academic_year', 'status', 'grade', 'letter_grade', 'enrollment_date', 'completion_date', 'section', 'notes')
+                    ->withTimestamps();
+    }
+
+    public function activeCourses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')
+                    ->wherePivot('status', 'enrolled')
+                    ->withPivot('semester', 'academic_year', 'status', 'grade', 'letter_grade', 'enrollment_date', 'completion_date', 'section', 'notes')
+                    ->withTimestamps();
+    }
+
+    public function completedCourses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')
+                    ->wherePivot('status', 'completed')
+                    ->withPivot('semester', 'academic_year', 'status', 'grade', 'letter_grade', 'enrollment_date', 'completion_date', 'section', 'notes')
+                    ->withTimestamps();
+    }
+
+    public function droppedCourses()
+    {
+        return $this->belongsToMany(Course::class, 'enrollments')
+                    ->wherePivot('status', 'dropped')
+                    ->withPivot('semester', 'academic_year', 'status', 'grade', 'letter_grade', 'enrollment_date', 'completion_date', 'section', 'notes')
+                    ->withTimestamps();
     }
 }
